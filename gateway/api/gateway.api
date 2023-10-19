@@ -1,0 +1,12 @@
+syntax = "v1"
+
+info(
+	title: "Gateway"
+	desc: "网关服务公共入口"
+	author: "Jopen Chen"
+	email: "18318159812@163.com"
+	version: "v1.0.0"
+)
+
+// 登录
+import "v0/login/login.api"

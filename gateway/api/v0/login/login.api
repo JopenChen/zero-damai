@@ -1,0 +1,33 @@
+syntax = "v1"
+
+info(
+    title: "Login"
+    desc: "登录相关接口"
+    author: "Jopen Chen"
+    email: "18318159812@163.com"
+    version: "v1.0.0"
+)
+
+type (
+    LoginReq {
+        Username string `json:"username"`
+        Password string `json:"password"`
+    }
+    LoginResp {
+        Id       int64  `json:"id"`
+        Name     string `json:"name"`
+        Token    string `json:"token"`
+        ExpireAt string `json:"expireAt"`
+    }
+)
+
+@server (
+    group: v0/login
+//    jwt: Auth
+//    middleware: CheckAuth
+    prefix: v0
+)
+service Gateway {
+    @handler Login
+    post /login (LoginReq) returns (LoginResp)
+}
