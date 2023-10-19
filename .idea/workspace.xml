@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76fb1e3-1428-46c1-9215-4bf4b66c82df" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/service/client/service/service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/client/testservice/test_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/mysql/user.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/mysql/user/user_model.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/mysql/user/user_model_gen.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/mysql/user/vars.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/etc/gateway.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/etc/gateway.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/internal/svc/service_context.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/svc/service_context.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/etc/service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/service/etc/service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/internal/svc/service_context.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/svc/service_context.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,8 +100,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build github.com/JopenChen/zero-damai/gateway" />
         <item itemvalue="Go Build.go build github.com/JopenChen/zero-damai/service" />
+        <item itemvalue="Go Build.go build github.com/JopenChen/zero-damai/gateway" />
       </list>
     </recent_temporary>
   </component>
