@@ -23,3 +23,5 @@ go.work
 .idea/zero-damai.iml
 .idea/modules.xml
 go.mod
+go.sum
+.idea/workspace.xml

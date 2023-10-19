@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package service;
+
+option go_package = "./service_pb";
+
+message LoginReq {
+  string UserName = 1;
+  string Password = 2;
+}
+
+message LoginResp {
+  int64  ID = 1;
+  string Name = 2;
+  string Token = 3;
+  int64 ExpireAt = 4;
+}
+
+service Service {
+  rpc Login (LoginReq) returns (LoginResp);
+}
+
+service TestService {
+  rpc Login (LoginReq) returns (LoginResp);
+}

@@ -5,20 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76fb1e3-1428-46c1-9215-4bf4b66c82df" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/api/gateway.api" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/api/v0/login/login.api" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/etc/gateway.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/gateway.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/config/config.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/routes.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/login/login_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/login/login_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/svc/service_context.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/types/types.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/proto/login.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/etc/service.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/internal/config/config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/internal/logic/service/login_logic.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/internal/logic/testservice/login_logic.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/internal/server/service/service_server.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/internal/server/testservice/test_service_server.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/internal/svc/service_context.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/service_pb/service.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/service_pb/service_grpc.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,9 +70,16 @@
     "last_opened_file_path": "D:/workspace/go_workspace/src/github.com/JopenChen/zero-damai",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm"
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "go.vgo"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\workspace\go_workspace\src\github.com\JopenChen\zero-damai\service\proto" />
+      <recent name="D:\workspace\go_workspace\src\github.com\JopenChen\zero-damai\service\proto\v0" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
@@ -82,7 +88,11 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="VgoProject">
-    <integration-enabled>false</integration-enabled>
+    <environment>
+      <map>
+        <entry key="GORPOXY" value="https://goproxy.cn,direct" />
+      </map>
+    </environment>
     <settings-migrated>true</settings-migrated>
   </component>
 </project>
