@@ -9,15 +9,18 @@ info(
 )
 
 type (
+    // 登录
     LoginReq {
-        Username string `json:"username"`
-        Password string `json:"password"`
+        Mobile    string `json:"mobile"`                 // 账号
+        Password  string `json:"password,optional"`      // 账户密码
+        Code      string `json:"code,optional"`          // 手机验证码
+        LoginType int64  `json:"login_type,range=[1:7]"` // 登录类型：1=验证码、2=密码、3=支付宝、4=淘宝、5=微信、6=新浪、7=QQ
     }
     LoginResp {
-        Id       int64  `json:"id"`
-        Name     string `json:"name"`
-        Token    string `json:"token"`
-        ExpireAt string `json:"expireAt"`
+        ID       int64  `json:"id"`        // 用户ID
+        Name     string `json:"name"`      // 用户名
+        Token    string `json:"token"`     // Jwt Token
+        ExpireAt int64  `json:"expire_at"` // 认证过期时间
     }
 )
 
@@ -28,6 +31,7 @@ type (
     prefix: v0
 )
 service Gateway {
+    @doc "登录"
     @handler Login
     post /login (LoginReq) returns (LoginResp)
 }

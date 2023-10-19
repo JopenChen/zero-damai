@@ -26,6 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ServiceClient interface {
+	// Login 登录
 	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 }
 
@@ -50,6 +51,7 @@ func (c *serviceClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.Ca
 // All implementations must embed UnimplementedServiceServer
 // for forward compatibility
 type ServiceServer interface {
+	// Login 登录
 	Login(context.Context, *LoginReq) (*LoginResp, error)
 	mustEmbedUnimplementedServiceServer()
 }

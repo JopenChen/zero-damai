@@ -2,6 +2,7 @@ package login
 
 import (
 	"context"
+	"github.com/JopenChen/zero-damai/service/client/service"
 
 	"github.com/JopenChen/zero-damai/gateway/internal/svc"
 	"github.com/JopenChen/zero-damai/gateway/internal/types"
@@ -24,7 +25,23 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 }
 
 func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err error) {
-	// todo: add your logic here and delete this line
+	resp = new(types.LoginResp)
+	
+	rpcResp, err := l.svcCtx.ServiceRpc.Login(l.ctx, &service.LoginReq{
+		Mobile:    req.Mobile,
+		Password:  req.Password,
+		Code:      req.Code,
+		LoginType: req.LoginType,
+	})
+	if err != nil {
+		l.Logger.Errorf("Gateway Login -> Service Login error: %v", err)
+		return
+	}
 
+	// Return
+	resp.ID = rpcResp.ID
+	resp.Name = rpcResp.Name
+	resp.Token = rpcResp.Token
+	resp.ExpireAt = rpcResp.ExpireAt
 	return
 }

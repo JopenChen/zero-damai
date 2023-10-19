@@ -17,6 +17,7 @@ type (
 	LoginResp = service_pb.LoginResp
 
 	Service interface {
+		// Login 登录
 		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 	}
 
@@ -31,6 +32,7 @@ func NewService(cli zrpc.Client) Service {
 	}
 }
 
+// Login 登录
 func (m *defaultService) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
 	client := service_pb.NewServiceClient(m.cli.Conn())
 	return client.Login(ctx, in, opts...)

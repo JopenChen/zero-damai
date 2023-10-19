@@ -22,6 +22,7 @@ func NewServiceServer(svcCtx *svc.ServiceContext) *ServiceServer {
 	}
 }
 
+// Login 登录
 func (s *ServiceServer) Login(ctx context.Context, in *service_pb.LoginReq) (*service_pb.LoginResp, error) {
 	l := servicelogic.NewLoginLogic(ctx, s.svcCtx)
 	return l.Login(in)

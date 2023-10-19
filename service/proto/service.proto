@@ -4,19 +4,22 @@ package service;
 
 option go_package = "./service_pb";
 
+// Login 登录
 message LoginReq {
-  string UserName = 1;
-  string Password = 2;
+  string Mobile = 1;     // 账号
+  string Password = 2;   // 账户密码
+  string Code = 3;       // 手机验证码
+  int64  LoginType = 4;  // 登录类型：1=验证码、2=密码、3=支付宝、4=淘宝、5=微信、6=新浪、7=QQ
 }
-
 message LoginResp {
-  int64  ID = 1;
-  string Name = 2;
-  string Token = 3;
-  int64 ExpireAt = 4;
+  int64  ID = 1;         // 用户ID
+  string Name = 2;       // 用户名
+  string Token = 3;      // Jwt Token
+  int64  ExpireAt = 4;   // 认证过期时间
 }
 
 service Service {
+  // Login 登录
   rpc Login (LoginReq) returns (LoginResp);
 }
 

@@ -5,16 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76fb1e3-1428-46c1-9215-4bf4b66c82df" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/database/mysql/user.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/mysql/user/user_model.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/mysql/user/user_model_gen.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/mysql/user/vars.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/global/constant.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/global/function.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/mysql/user.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/mysql/user.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/api/v0/login/login.api" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/api/v0/login/login.api" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/internal/logic/v0/login/login_logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/login/login_logic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/internal/types/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/types/types.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/etc/service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/service/etc/service.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/internal/svc/service_context.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/svc/service_context.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/mysql/user/user_model.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/mysql/user/user_model.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/mysql/user/user_model_gen.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/mysql/user/user_model_gen.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/client/service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/client/service/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/internal/logic/service/login_logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/logic/service/login_logic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/internal/server/service/service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/server/service/service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/proto/service.proto" beforeDir="false" afterPath="$PROJECT_DIR$/service/proto/service.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/service_pb/service.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/service_pb/service.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/service_pb/service_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/service_pb/service_grpc.pb.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +35,7 @@
         <option value="Api Template" />
         <option value="Proto File" />
         <option value="Api File" />
+        <option value="Go File" />
       </list>
     </option>
   </component>
@@ -52,14 +60,16 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "DefaultApiTemplateProperty": "Api File",
-    "DefaultGoTemplateProperty": "Go Application",
+    "DefaultGoTemplateProperty": "Go File",
     "DefaultProtoTemplateProperty": "Proto File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
@@ -68,7 +78,7 @@
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "go.vgo"
+    "settings.editor.selected.configurable": "terminal"
   }
 }]]></component>
   <component name="RecentsManager">
