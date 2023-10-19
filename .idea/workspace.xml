@@ -5,19 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76fb1e3-1428-46c1-9215-4bf4b66c82df" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/etc/service.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/config/config.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/service/login_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/testservice/login_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/server/service/service_server.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/server/testservice/test_service_server.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/svc/service_context.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/service_pb/service.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/service_pb/service_grpc.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/client/service/service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/client/testservice/test_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/etc/gateway.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/etc/gateway.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/internal/svc/service_context.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/svc/service_context.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/etc/service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/service/etc/service.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +73,34 @@
       <recent name="D:\workspace\go_workspace\src\github.com\JopenChen\zero-damai\service\proto" />
       <recent name="D:\workspace\go_workspace\src\github.com\JopenChen\zero-damai\service\proto\v0" />
     </key>
+  </component>
+  <component name="RunManager" selected="Go Build.go build github.com/JopenChen/zero-damai/gateway">
+    <configuration name="go build github.com/JopenChen/zero-damai/gateway" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="zero-damai" />
+      <working_directory value="$PROJECT_DIR$" />
+      <parameters value="-f D:\workspace\go_workspace\src\github.com\JopenChen\zero-damai\gateway\etc\gateway.yaml" />
+      <kind value="PACKAGE" />
+      <package value="github.com/JopenChen/zero-damai/gateway" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/gateway/gateway.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build github.com/JopenChen/zero-damai/service" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="zero-damai" />
+      <working_directory value="$PROJECT_DIR$" />
+      <parameters value="-f D:\workspace\go_workspace\src\github.com\JopenChen\zero-damai\service\etc\service.yaml" />
+      <kind value="PACKAGE" />
+      <package value="github.com/JopenChen/zero-damai/service" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/service/service.go" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build github.com/JopenChen/zero-damai/gateway" />
+        <item itemvalue="Go Build.go build github.com/JopenChen/zero-damai/service" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">

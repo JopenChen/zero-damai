@@ -1,6 +1,4 @@
 Name: service.rpc
-ListenOn: 0.0.0.0:8080
-Etcd:
-  Hosts:
-  - 127.0.0.1:2379
-  Key: service.rpc
+ListenOn: 0.0.0.0:9080
+Timeout: 10000000
+Mode: dev # 开发模式 default=pro,options=dev|test|rt|pre|pro

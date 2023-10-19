@@ -1,3 +1,15 @@
 Name: Gateway
 Host: 0.0.0.0
-Port: 8888
+Port: 8080
+Mode: dev # 开发模式 default=pro,options=dev|test|rt|pre|pro
+Timeout: 10000000
+MaxConns: 10000 # 最大并发连接数qps，默认值为 10000
+MaxBytes: 8388608
+
+
+# Service RPC 服务配置
+ServiceRpc:
+    Timeout: 100000000
+    # 直连模式
+    Endpoints:
+      - 127.0.0.1:9080
