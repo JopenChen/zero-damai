@@ -6,6 +6,7 @@
 | 工具名   | 版本     | 仓库地址                                  |
 |-------|--------|---------------------------------------|
 | goctl | v1.5.6 | https://github.com/zeromicro/go-zero  |
+
 特别鸣谢 go-zero 开源社区，官方地址：https://go-zero.dev/
 
 ## 开发步骤
@@ -39,6 +40,10 @@ go mod tidy
 
 ## 作者联系方式
 微信：Jopen_Chen (备注：zero-damai )
+
+## 公众号：Golang 进阶栈
+
+<img height="100" src="doc\images\公众号二维码.jpg" title="Golang 进阶栈公众号二维码" width="100"/>
 
 
 
