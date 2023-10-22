@@ -10,6 +10,8 @@
 特别鸣谢 go-zero 开源社区，官方地址：https://go-zero.dev/
 
 ## 开发步骤
+说明：goctl 代码生成模板部分修改过，目录为：template/1.5.6。
+
 1、配置 go-zero 开发环境，详情请参考：https://go-zero.dev/docs/tasks/installation/goctl
 
 2、拉取本仓库代码
