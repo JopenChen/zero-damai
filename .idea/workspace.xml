@@ -5,23 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76fb1e3-1428-46c1-9215-4bf4b66c82df" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/common/errx/errx.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/response/response.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/mysql/log.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/mysql/order.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/mysql/performance.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/mysql/performance_seat.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/mysql/performance_session.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/template/1.5.6/api/handler_backup.tpl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/template/1.5.6/model/model_backup.tpl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/mysql/performance_seat/performance_seat_model.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/mysql/performance_seat/performance_seat_model_gen.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/mysql/performance_seat/vars.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/mysql/performance_session/performance_session_model.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/mysql/performance_session/performance_session_model_gen.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/model/mysql/performance_session/vars.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/global/function.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/global/function.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/internal/handler/v0/login/login_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/login/login_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/mysql/user/user_model.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/mysql/user/user_model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/1.5.6/model/model.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/1.5.6/model/model.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/mysql/user/user_model_gen.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/mysql/user/user_model_gen.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
