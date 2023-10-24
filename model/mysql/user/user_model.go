@@ -38,6 +38,7 @@ func (c customUserModel) RowBuilder() squirrel.SelectBuilder {
 	return squirrel.Select(userRows).From(c.table)
 }
 
+// GetByCondition 根据条件获取单条记录
 func (c customUserModel) GetByCondition(ctx context.Context, rowBuilder squirrel.SelectBuilder) (data *User, err error) {
 	query, values, err := rowBuilder.Where(squirrel.Eq{"is_del": global.DelStateNo}).ToSql()
 	if err != nil {
@@ -54,6 +55,7 @@ func (c customUserModel) GetByCondition(ctx context.Context, rowBuilder squirrel
 	}
 }
 
+// FindByCondition 根据条件获取所有符合的记录
 func (c customUserModel) FindByCondition(ctx context.Context, rowBuilder squirrel.SelectBuilder, orderBy string) ([]*User, error) {
 	if orderBy == global.EmptyString {
 		rowBuilder = rowBuilder.OrderBy("id DESC")
