@@ -1,6 +1,9 @@
 package {{.pkg}}
 {{if .withCache}}
 import (
+    "context"
+	"github.com/JopenChen/zero-damai/common/global"
+	"github.com/Masterminds/squirrel"
 	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
