@@ -13,3 +13,8 @@ ServiceRpc:
     # 直连模式
     Endpoints:
       - 127.0.0.1:9080
+
+# Jwt 配置
+Auth:
+  AccessSecret: ad879037-c7a4-4063-9236-6bfc66d54b7d
+  AccessExpire: 14400000

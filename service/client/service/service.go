@@ -13,12 +13,17 @@ import (
 )
 
 type (
-	LoginReq  = service_pb.LoginReq
-	LoginResp = service_pb.LoginResp
+	EmptyResp   = service_pb.EmptyResp
+	LoginReq    = service_pb.LoginReq
+	LoginResp   = service_pb.LoginResp
+	UserAddReq  = service_pb.UserAddReq
+	UserAddResp = service_pb.UserAddResp
 
 	Service interface {
 		// Login 登录
 		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
+		// UserAdd 用户注册
+		UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
 	}
 
 	defaultService struct {
@@ -36,4 +41,10 @@ func NewService(cli zrpc.Client) Service {
 func (m *defaultService) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
 	client := service_pb.NewServiceClient(m.cli.Conn())
 	return client.Login(ctx, in, opts...)
+}
+
+// UserAdd 用户注册
+func (m *defaultService) UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error) {
+	client := service_pb.NewServiceClient(m.cli.Conn())
+	return client.UserAdd(ctx, in, opts...)
 }

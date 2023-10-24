@@ -14,3 +14,21 @@ type LoginResp struct {
 	Token    string `json:"token"`     // Jwt Token
 	ExpireAt int64  `json:"expire_at"` // 认证过期时间
 }
+
+type UserAddReq struct {
+	Name     string `json:"name,optional"`                 // 姓名
+	Nickname string `json:"nickname"`                      // 昵称
+	Avatar   string `json:"avatar,optional"`               // 头像
+	Mobile   string `json:"mobile"`                        // 手机号
+	Password string `json:"password,optional"`             // 密码
+	Mail     string `json:"mail,optional"`                 // 邮箱地址
+	Identity string `json:"identity,optional"`             // 身份证号
+	Gender   int64  `json:"gender,range=[1:],default=4"`   // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
+	Nation   string `json:"nation,optional"`               // 民族
+	Birthday int64  `json:"birthday,range=[0:],default=0"` // 出生日期
+	Address  string `json:"address,optional"`              // 收货地址
+}
+
+type UserAddResp struct {
+	Id int64 `json:"id"` // 用户ID
+}

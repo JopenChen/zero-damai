@@ -1,7 +1,8 @@
 package global
 
 const (
-	EmptyString = ""
+	EmptyArrayString = "[]"
+	EmptyString      = ""
 )
 
 const (

@@ -13,8 +13,11 @@ import (
 )
 
 type (
-	LoginReq  = service_pb.LoginReq
-	LoginResp = service_pb.LoginResp
+	EmptyResp   = service_pb.EmptyResp
+	LoginReq    = service_pb.LoginReq
+	LoginResp   = service_pb.LoginResp
+	UserAddReq  = service_pb.UserAddReq
+	UserAddResp = service_pb.UserAddResp
 
 	TestService interface {
 		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)

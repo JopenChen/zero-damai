@@ -4,6 +4,9 @@ package service;
 
 option go_package = "./service_pb";
 
+// 公共
+message EmptyResp {}
+
 // Login 登录
 message LoginReq {
   string Mobile = 1;     // 账号
@@ -18,9 +21,30 @@ message LoginResp {
   int64  ExpireAt = 4;   // 认证过期时间
 }
 
+// UserAdd 用户注册
+message UserAddReq {
+  string Name = 1;     // 姓名
+  string Nickname = 2; // 昵称
+  string Avatar = 3;   // 头像
+  string Mobile = 4;   // 手机号
+  string Password = 5; // 密码
+  string Mail = 6;     // 邮箱地址
+  string Identity = 7; // 身份证号
+  int64  Gender = 8;   // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
+  string Nation = 9;   // 民族
+  int64  Birthday = 10;// 出生日期
+  string Address = 11; // 收货地址
+}
+message  UserAddResp {
+  int64 Id = 1; // 用户ID
+}
+
 service Service {
   // Login 登录
   rpc Login (LoginReq) returns (LoginResp);
+
+  // UserAdd 用户注册
+  rpc UserAdd (UserAddReq) returns (UserAddResp);
 }
 
 service TestService {

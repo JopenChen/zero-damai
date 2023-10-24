@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	v0login "github.com/JopenChen/zero-damai/gateway/internal/handler/v0/login"
+	v0user "github.com/JopenChen/zero-damai/gateway/internal/handler/v0/user"
 	"github.com/JopenChen/zero-damai/gateway/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -17,6 +18,17 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodPost,
 				Path:    "/login",
 				Handler: v0login.LoginHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/v0"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/user",
+				Handler: v0user.UserAddHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/v0"),

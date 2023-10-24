@@ -27,3 +27,9 @@ func (s *ServiceServer) Login(ctx context.Context, in *service_pb.LoginReq) (*se
 	l := servicelogic.NewLoginLogic(ctx, s.svcCtx)
 	return l.Login(in)
 }
+
+// UserAdd 用户注册
+func (s *ServiceServer) UserAdd(ctx context.Context, in *service_pb.UserAddReq) (*service_pb.UserAddResp, error) {
+	l := servicelogic.NewUserAddLogic(ctx, s.svcCtx)
+	return l.UserAdd(in)
+}

@@ -19,6 +19,9 @@ type Response struct {
 }
 
 func success(resp interface{}) *Response {
+	if resp == nil {
+		resp = &emptyObj{}
+	}
 	return &Response{0, "OK", resp}
 }
 

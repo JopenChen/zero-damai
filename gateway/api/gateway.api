@@ -10,3 +10,5 @@ info(
 
 // 登录
 import "v0/login/login.api"
+// 用户
+import "v0/user/user.api"

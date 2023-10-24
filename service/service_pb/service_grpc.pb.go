@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Service_Login_FullMethodName = "/service.Service/Login"
+	Service_Login_FullMethodName   = "/service.Service/Login"
+	Service_UserAdd_FullMethodName = "/service.Service/UserAdd"
 )
 
 // ServiceClient is the client API for Service service.
@@ -28,6 +29,8 @@ const (
 type ServiceClient interface {
 	// Login 登录
 	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
+	// UserAdd 用户注册
+	UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
 }
 
 type serviceClient struct {
@@ -47,12 +50,23 @@ func (c *serviceClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.Ca
 	return out, nil
 }
 
+func (c *serviceClient) UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error) {
+	out := new(UserAddResp)
+	err := c.cc.Invoke(ctx, Service_UserAdd_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ServiceServer is the server API for Service service.
 // All implementations must embed UnimplementedServiceServer
 // for forward compatibility
 type ServiceServer interface {
 	// Login 登录
 	Login(context.Context, *LoginReq) (*LoginResp, error)
+	// UserAdd 用户注册
+	UserAdd(context.Context, *UserAddReq) (*UserAddResp, error)
 	mustEmbedUnimplementedServiceServer()
 }
 
@@ -62,6 +76,9 @@ type UnimplementedServiceServer struct {
 
 func (UnimplementedServiceServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (UnimplementedServiceServer) UserAdd(context.Context, *UserAddReq) (*UserAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserAdd not implemented")
 }
 func (UnimplementedServiceServer) mustEmbedUnimplementedServiceServer() {}
 
@@ -94,6 +111,24 @@ func _Service_Login_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Service_UserAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceServer).UserAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Service_UserAdd_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceServer).UserAdd(ctx, req.(*UserAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Service_ServiceDesc is the grpc.ServiceDesc for Service service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -104,6 +139,10 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Login",
 			Handler:    _Service_Login_Handler,
+		},
+		{
+			MethodName: "UserAdd",
+			Handler:    _Service_UserAdd_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -5,15 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76fb1e3-1428-46c1-9215-4bf4b66c82df" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/common/jwt/jwt.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/api/v0/user/user.api" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/user/user_add_handler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/user/user_add_logic.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/service/internal/logic/service/user_add_logic.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/errx/errx.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/errx/errx.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/global/constant.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/global/constant.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/response/response.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/response/response.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/etc/service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/service/etc/service.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/internal/logic/service/login_logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/logic/service/login_logic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/api/gateway.api" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/api/gateway.api" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/etc/gateway.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/etc/gateway.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/internal/handler/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/handler/routes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/internal/types/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/types/types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/client/service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/client/service/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/client/testservice/test_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/client/testservice/test_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/internal/server/service/service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/server/service/service_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/proto/service.proto" beforeDir="false" afterPath="$PROJECT_DIR$/service/proto/service.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/service_pb/service.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/service_pb/service.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/service_pb/service_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/service_pb/service_grpc.pb.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
