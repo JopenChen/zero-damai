@@ -10,7 +10,7 @@
 特别鸣谢 go-zero 开源社区，官方地址：https://go-zero.dev/
 
 ## 开发步骤
-说明：goctl 代码生成模板部分修改过，目录为：template/1.5.6。
+说明：goctl 代码生成模板部分修改过，目录为：template/1.5.6，文件名带有“_backup”后缀的说明有修改过。
 
 1、配置 go-zero 开发环境，详情请参考：https://go-zero.dev/docs/tasks/installation/goctl
 
@@ -31,6 +31,11 @@ go mod tidy
 5、启动 API 服务
 
 6、测试
+
+## 设计指标
+1、以 1 千万活跃用户量为基准；
+
+2、仅考虑 APP 客户端。
 
 ## 项目架构概述
 

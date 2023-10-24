@@ -5,23 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76fb1e3-1428-46c1-9215-4bf4b66c82df" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/global/constant.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/global/function.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/errx/errx.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/response/response.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/mysql/log.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/mysql/order.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/mysql/performance.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/mysql/performance_seat.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/mysql/performance_session.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/1.5.6/api/handler_backup.tpl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/1.5.6/model/model_backup.tpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/mysql/user.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/mysql/user.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/api/v0/login/login.api" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/api/v0/login/login.api" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/internal/logic/v0/login/login_logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/login/login_logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/internal/types/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/types/types.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/global/function.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/global/function.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/internal/handler/v0/login/login_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/login/login_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/mysql/user/user_model.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/mysql/user/user_model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/mysql/user/user_model_gen.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/mysql/user/user_model_gen.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/client/service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/client/service/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/internal/logic/service/login_logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/logic/service/login_logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/internal/server/service/service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/server/service/service_server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/proto/service.proto" beforeDir="false" afterPath="$PROJECT_DIR$/service/proto/service.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/service_pb/service.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/service_pb/service.pb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/service_pb/service_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/service_pb/service_grpc.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/1.5.6/model/model.tpl" beforeDir="false" afterPath="$PROJECT_DIR$/template/1.5.6/model/model.tpl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,20 +68,27 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/workspace/go_workspace/src/github.com/JopenChen/zero-damai",
+    "last_opened_file_path": "D:/workspace/go_workspace/src/github.com/JopenChen/zero-damai/template/1.5.6/model",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "terminal"
+    "settings.editor.selected.configurable": "go.vgo"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\workspace\go_workspace\src\github.com\JopenChen\zero-damai\template\1.5.6\model" />
+      <recent name="D:\workspace\go_workspace\src\github.com\JopenChen\zero-damai\template\1.5.6\api" />
+      <recent name="D:\workspace\go_workspace\src\github.com\JopenChen\zero-damai\template" />
+      <recent name="D:\workspace\go_workspace\src\github.com\JopenChen\zero-damai\doc\images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\workspace\go_workspace\src\github.com\JopenChen\zero-damai\service\proto" />
       <recent name="D:\workspace\go_workspace\src\github.com\JopenChen\zero-damai\service\proto\v0" />
@@ -110,8 +117,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build github.com/JopenChen/zero-damai/service" />
         <item itemvalue="Go Build.go build github.com/JopenChen/zero-damai/gateway" />
+        <item itemvalue="Go Build.go build github.com/JopenChen/zero-damai/service" />
       </list>
     </recent_temporary>
   </component>
