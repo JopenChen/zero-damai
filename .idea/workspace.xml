@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76fb1e3-1428-46c1-9215-4bf4b66c82df" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/common/jwt/jwt.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/errx/errx.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/errx/errx.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/global/constant.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/global/constant.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/response/response.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/response/response.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/etc/service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/service/etc/service.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/internal/logic/service/login_logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/logic/service/login_logic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/internal/server/service/service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/server/service/service_server.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,5 +128,16 @@
       </map>
     </environment>
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/gateway/internal/logic/v0/login/login_logic.go</url>
+          <line>35</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

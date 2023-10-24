@@ -9,4 +9,10 @@ type Config struct {
 	Mysql struct {
 		Datasource string
 	}
+
+	// JWT 配置
+	Jwt struct {
+		Secret string // 秘钥
+		Expire int64  // 过期时间，单位：s
+	}
 }

@@ -6,3 +6,8 @@ Mode: dev # 开发模式 default=pro,options=dev|test|rt|pre|pro
 ## Mysql 数据库配置
 Mysql:
   Datasource: root:jop123@tcp(localhost:3306)/zero_damai?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+
+## JWT 配置
+Jwt:
+  Secret: ad879037-c7a4-4063-9236-6bfc66d54b7d
+  Expire: 14400000
