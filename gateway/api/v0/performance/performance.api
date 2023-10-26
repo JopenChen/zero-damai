@@ -1,0 +1,43 @@
+syntax = "v1"
+
+info(
+    title: "Performance"
+    desc: "演出活动相关接口"
+    author: "Jopen Chen"
+    email: "18318159812@163.com"
+    version: "v1.0.0"
+)
+
+type (
+    Performance {
+        Id             int64  `json:"id"`               // ID
+        Title          string `json:"title"`            // 标题
+        Description    string `json:"description"`      // 描述
+        City           string `json:"city"`             // 所在城市
+        Address        string `json:"address"`          // 具体地址
+        PrioritySaleAt int64  `json:"priority_sale_at"` // 优先购开售时间
+        SaleAt         int64  `json:"sale_at"`          // 开售时间
+        CreatedAt      int64  `json:"created_at"`       // 创建时间
+        UpdatedAt      int64  `json:"updated_at"`       // 更新时间
+    }
+    // 获取演出活动列表
+    PerformanceRetrieveReq {
+        Paging
+    }
+    PerformanceRetrieveResp {
+        Total int64          `json:"total"` // 总数
+        Data  []*Performance `json:"data"`  // 演出活动列表
+    }
+)
+
+@server (
+    group: v0/performance
+    jwt: Auth
+    //    middleware: CheckAuth
+    prefix: v0
+)
+service Gateway {
+    @doc "获取演出活动列表"
+    @handler PerformanceRetrieve
+    get /performance (PerformanceRetrieveReq) returns (PerformanceRetrieveResp)
+}

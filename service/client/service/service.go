@@ -13,17 +13,24 @@ import (
 )
 
 type (
-	EmptyResp   = service_pb.EmptyResp
-	LoginReq    = service_pb.LoginReq
-	LoginResp   = service_pb.LoginResp
-	UserAddReq  = service_pb.UserAddReq
-	UserAddResp = service_pb.UserAddResp
+	EmptyResp               = service_pb.EmptyResp
+	FilterItem              = service_pb.FilterItem
+	LoginReq                = service_pb.LoginReq
+	LoginResp               = service_pb.LoginResp
+	Performance             = service_pb.Performance
+	PerformanceRetrieveReq  = service_pb.PerformanceRetrieveReq
+	PerformanceRetrieveResp = service_pb.PerformanceRetrieveResp
+	SortItem                = service_pb.SortItem
+	UserAddReq              = service_pb.UserAddReq
+	UserAddResp             = service_pb.UserAddResp
 
 	Service interface {
 		// Login 登录
 		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 		// UserAdd 用户注册
 		UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
+		// PerformanceRetrieve 获取演出活动列表
+		PerformanceRetrieve(ctx context.Context, in *PerformanceRetrieveReq, opts ...grpc.CallOption) (*PerformanceRetrieveResp, error)
 	}
 
 	defaultService struct {
@@ -47,4 +54,10 @@ func (m *defaultService) Login(ctx context.Context, in *LoginReq, opts ...grpc.C
 func (m *defaultService) UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error) {
 	client := service_pb.NewServiceClient(m.cli.Conn())
 	return client.UserAdd(ctx, in, opts...)
+}
+
+// PerformanceRetrieve 获取演出活动列表
+func (m *defaultService) PerformanceRetrieve(ctx context.Context, in *PerformanceRetrieveReq, opts ...grpc.CallOption) (*PerformanceRetrieveResp, error) {
+	client := service_pb.NewServiceClient(m.cli.Conn())
+	return client.PerformanceRetrieve(ctx, in, opts...)
 }

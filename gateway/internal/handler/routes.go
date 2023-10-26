@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	v0login "github.com/JopenChen/zero-damai/gateway/internal/handler/v0/login"
+	v0performance "github.com/JopenChen/zero-damai/gateway/internal/handler/v0/performance"
 	v0user "github.com/JopenChen/zero-damai/gateway/internal/handler/v0/user"
 	"github.com/JopenChen/zero-damai/gateway/internal/svc"
 
@@ -31,6 +32,18 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: v0user.UserAddHandler(serverCtx),
 			},
 		},
+		rest.WithPrefix("/v0"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/performance",
+				Handler: v0performance.PerformanceRetrieveHandler(serverCtx),
+			},
+		},
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
 		rest.WithPrefix("/v0"),
 	)
 }

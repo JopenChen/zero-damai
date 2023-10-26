@@ -7,8 +7,11 @@ info(
 	email: "18318159812@163.com"
 	version: "v1.0.0"
 )
-
+// 公共
+import "common/public.api"
 // 登录
 import "v0/login/login.api"
 // 用户
 import "v0/user/user.api"
+// 演出活动
+import "v0/performance/performance.api"

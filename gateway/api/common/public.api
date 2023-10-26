@@ -1,0 +1,22 @@
+syntax = "v1"
+
+info(
+	title: "公共定义"
+	desc: "type desc here"
+	author: "JopenChen"
+	email: "18318159812@163.com"
+	version: "v1.0.0"
+)
+
+type (
+	Paging {
+		Page     int64  `form:"page,range=[0:],default=1"`
+		PageSize int64  `form:"page_size,range=[0:],default=10"`
+		Filter   string `form:"filter,optional"`
+		Sort     string `form:"sort,optional"`
+	}
+
+	GeneralPathId {
+		Id int64 `path:"id,range=[1:]"`
+	}
+)

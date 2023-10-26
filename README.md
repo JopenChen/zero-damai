@@ -1,6 +1,8 @@
 # zero-damai
 基于 go-zero 框架仿写的大麦 App 服务，旨在开发交流学习。
 
+对应的后台服务 zero-damai-admin，可关注公众号回复获取项目权限：zero-damai-admin
+
 ## 依赖 go-zero 版本
 
 | 工具名   | 版本     | 仓库地址                                  |
@@ -48,7 +50,9 @@ go mod tidy
 
 1、API 文档开放地址, 对话框回复：API 文档；
 
-2、微信交流群，对话框回复：zero-damai。
+2、微信交流群，对话框回复：zero-damai；
+
+3、zero-damai-admin 项目权限，对话框回复：zero-damai-admin。
 
 
 

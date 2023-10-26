@@ -1,8 +1,10 @@
 package global
 
 const (
+	Zero             = 0
 	EmptyArrayString = "[]"
 	EmptyString      = ""
+	IdString         = "id"
 )
 
 const (

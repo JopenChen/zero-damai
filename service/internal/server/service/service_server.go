@@ -33,3 +33,9 @@ func (s *ServiceServer) UserAdd(ctx context.Context, in *service_pb.UserAddReq) 
 	l := servicelogic.NewUserAddLogic(ctx, s.svcCtx)
 	return l.UserAdd(in)
 }
+
+// PerformanceRetrieve 获取演出活动列表
+func (s *ServiceServer) PerformanceRetrieve(ctx context.Context, in *service_pb.PerformanceRetrieveReq) (*service_pb.PerformanceRetrieveResp, error) {
+	l := servicelogic.NewPerformanceRetrieveLogic(ctx, s.svcCtx)
+	return l.PerformanceRetrieve(in)
+}

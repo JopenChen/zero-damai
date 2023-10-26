@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Service_Login_FullMethodName   = "/service.Service/Login"
-	Service_UserAdd_FullMethodName = "/service.Service/UserAdd"
+	Service_Login_FullMethodName               = "/service.Service/Login"
+	Service_UserAdd_FullMethodName             = "/service.Service/UserAdd"
+	Service_PerformanceRetrieve_FullMethodName = "/service.Service/PerformanceRetrieve"
 )
 
 // ServiceClient is the client API for Service service.
@@ -31,6 +32,8 @@ type ServiceClient interface {
 	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 	// UserAdd 用户注册
 	UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
+	// PerformanceRetrieve 获取演出活动列表
+	PerformanceRetrieve(ctx context.Context, in *PerformanceRetrieveReq, opts ...grpc.CallOption) (*PerformanceRetrieveResp, error)
 }
 
 type serviceClient struct {
@@ -59,6 +62,15 @@ func (c *serviceClient) UserAdd(ctx context.Context, in *UserAddReq, opts ...grp
 	return out, nil
 }
 
+func (c *serviceClient) PerformanceRetrieve(ctx context.Context, in *PerformanceRetrieveReq, opts ...grpc.CallOption) (*PerformanceRetrieveResp, error) {
+	out := new(PerformanceRetrieveResp)
+	err := c.cc.Invoke(ctx, Service_PerformanceRetrieve_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ServiceServer is the server API for Service service.
 // All implementations must embed UnimplementedServiceServer
 // for forward compatibility
@@ -67,6 +79,8 @@ type ServiceServer interface {
 	Login(context.Context, *LoginReq) (*LoginResp, error)
 	// UserAdd 用户注册
 	UserAdd(context.Context, *UserAddReq) (*UserAddResp, error)
+	// PerformanceRetrieve 获取演出活动列表
+	PerformanceRetrieve(context.Context, *PerformanceRetrieveReq) (*PerformanceRetrieveResp, error)
 	mustEmbedUnimplementedServiceServer()
 }
 
@@ -79,6 +93,9 @@ func (UnimplementedServiceServer) Login(context.Context, *LoginReq) (*LoginResp,
 }
 func (UnimplementedServiceServer) UserAdd(context.Context, *UserAddReq) (*UserAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserAdd not implemented")
+}
+func (UnimplementedServiceServer) PerformanceRetrieve(context.Context, *PerformanceRetrieveReq) (*PerformanceRetrieveResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PerformanceRetrieve not implemented")
 }
 func (UnimplementedServiceServer) mustEmbedUnimplementedServiceServer() {}
 
@@ -129,6 +146,24 @@ func _Service_UserAdd_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Service_PerformanceRetrieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PerformanceRetrieveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ServiceServer).PerformanceRetrieve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Service_PerformanceRetrieve_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ServiceServer).PerformanceRetrieve(ctx, req.(*PerformanceRetrieveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Service_ServiceDesc is the grpc.ServiceDesc for Service service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -143,6 +178,10 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UserAdd",
 			Handler:    _Service_UserAdd_Handler,
+		},
+		{
+			MethodName: "PerformanceRetrieve",
+			Handler:    _Service_PerformanceRetrieve_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

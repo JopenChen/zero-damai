@@ -13,6 +13,9 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
+
+	"github.com/JopenChen/zero-damai/common/global"
+	"github.com/Masterminds/squirrel"
 )
 
 var (
@@ -28,6 +31,18 @@ type (
 		FindOne(ctx context.Context, id int64) (*User, error)
 		Update(ctx context.Context, data *User) error
 		Delete(ctx context.Context, id int64) error
+
+		RowBuilder() squirrel.SelectBuilder
+		CountBuilder(field string) squirrel.SelectBuilder
+
+		// GetByCondition 根据条件获取单条记录
+		GetByCondition(ctx context.Context, rowBuilder squirrel.SelectBuilder) (*User, error)
+		// FindByCondition 根据条件获取所有符合的记录
+		FindByCondition(ctx context.Context, rowBuilder squirrel.SelectBuilder, orderBy string) ([]*User, error)
+		// FindPageByCondition 根据条件获取分页记录
+		FindPageByCondition(ctx context.Context, page int64, pageSize int64, rowBuilder squirrel.SelectBuilder, orderBy string) ([]*User, error)
+		// CountByCondition 根据条件获取总数
+		CountByCondition(ctx context.Context, countBuilder squirrel.SelectBuilder) (int64, error)
 	}
 
 	defaultUserModel struct {
@@ -58,6 +73,102 @@ type (
 	}
 )
 
+func (m *defaultUserModel) RowBuilder() squirrel.SelectBuilder {
+	return squirrel.Select(userRows).From(m.table)
+}
+
+func (m *defaultUserModel) CountBuilder(field string) squirrel.SelectBuilder {
+	return squirrel.Select("COUNT(" + field + ") as count").From(m.table)
+}
+
+// GetByCondition 根据条件获取单条记录
+func (m *defaultUserModel) GetByCondition(ctx context.Context, rowBuilder squirrel.SelectBuilder) (data *User, err error) {
+	query, values, err := rowBuilder.Where(squirrel.Eq{"is_del": global.DelStateNo}).ToSql()
+	if err != nil {
+		return
+	}
+
+	var resp User
+	err = m.conn.QueryRowCtx(ctx, &resp, query, values...)
+	switch err {
+	case nil:
+		return &resp, nil
+	default:
+		return nil, err
+	}
+}
+
+// FindByCondition 根据条件获取所有符合的记录
+func (m *defaultUserModel) FindByCondition(ctx context.Context, rowBuilder squirrel.SelectBuilder, orderBy string) ([]*User, error) {
+	if orderBy == global.EmptyString {
+		rowBuilder = rowBuilder.OrderBy("id DESC")
+	} else {
+		rowBuilder = rowBuilder.OrderBy(orderBy)
+	}
+
+	query, values, err := rowBuilder.Where(squirrel.Eq{"is_del": global.DelStateNo}).ToSql()
+	if err != nil {
+		return nil, err
+	}
+
+	var resp []*User
+	err = m.conn.QueryRowsCtx(ctx, &resp, query, values...)
+	switch err {
+	case nil:
+		return resp, nil
+	default:
+		return nil, err
+	}
+}
+
+// FindPageByCondition 根据条件获取分页记录
+func (m *defaultUserModel) FindPageByCondition(ctx context.Context, page int64, pageSize int64, rowBuilder squirrel.SelectBuilder, orderBy string) ([]*User, error) {
+	if orderBy == global.EmptyString {
+		rowBuilder = rowBuilder.OrderBy("id DESC")
+	} else {
+		rowBuilder = rowBuilder.OrderBy(orderBy)
+	}
+
+	if pageSize == global.Zero {
+		pageSize = 10
+	}
+	if page < 1 {
+		page = 1
+	}
+	offset := (page - 1) * pageSize
+
+	query, paramList, err := rowBuilder.Where(squirrel.Eq{"is_del": global.DelStateNo}).
+		Offset(uint64(offset)).
+		Limit(uint64(pageSize)).
+		ToSql()
+	if err != nil {
+		return nil, err
+	}
+
+	var resp []*User
+	err = m.conn.QueryRowsCtx(ctx, &resp, query, paramList...)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp, err
+}
+
+// CountByCondition 根据条件获取总数
+func (m *defaultUserModel) CountByCondition(ctx context.Context, countBuilder squirrel.SelectBuilder) (int64, error) {
+	query, paramList, err := countBuilder.Where(squirrel.Eq{"is_del": global.DelStateNo}).ToSql()
+	if err != nil {
+		return 0, err
+	}
+
+	var resp int64
+	err = m.conn.QueryRowCtx(ctx, &resp, query, paramList...)
+	if err != nil {
+		return 0, err
+	}
+	return resp, nil
+}
+
 func newUserModel(conn sqlx.SqlConn) *defaultUserModel {
 	return &defaultUserModel{
 		conn:  conn,
@@ -73,13 +184,13 @@ func (m *defaultUserModel) withSession(session sqlx.Session) *defaultUserModel {
 }
 
 func (m *defaultUserModel) Delete(ctx context.Context, id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+	query := fmt.Sprintf("delete from %s where `id` = ? and `is_del` = %s", m.table, global.DelStateNo)
 	_, err := m.conn.ExecCtx(ctx, query, id)
 	return err
 }
 
 func (m *defaultUserModel) FindOne(ctx context.Context, id int64) (*User, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", userRows, m.table)
+	query := fmt.Sprintf("select %s from %s where `id` = ? and `is_del` = %s limit 1", userRows, m.table, global.DelStateNo)
 	var resp User
 	err := m.conn.QueryRowCtx(ctx, &resp, query, id)
 	switch err {
@@ -99,7 +210,7 @@ func (m *defaultUserModel) Insert(ctx context.Context, data *User) (sql.Result, 
 }
 
 func (m *defaultUserModel) Update(ctx context.Context, data *User) error {
-	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, userRowsWithPlaceHolder)
+	query := fmt.Sprintf("update %s set %s where `id` = ? and `is_del` = %s", m.table, userRowsWithPlaceHolder, global.DelStateNo)
 	_, err := m.conn.ExecCtx(ctx, query, data.Name, data.Nickname, data.Avatar, data.Background, data.Mobile, data.Password, data.Mail, data.Identity, data.Gender, data.Nation, data.Birthday, data.Address, data.Audience, data.Status, data.LoginAt, data.IsDel, data.Id)
 	return err
 }

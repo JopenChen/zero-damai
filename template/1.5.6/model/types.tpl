@@ -11,6 +11,8 @@ type (
         FindByCondition(ctx context.Context, rowBuilder squirrel.SelectBuilder, orderBy string) ([]*{{.upperStartCamelObject}}, error)
         // FindPageByCondition 根据条件获取分页记录
         FindPageByCondition(ctx context.Context, page int64, pageSize int64, rowBuilder squirrel.SelectBuilder, orderBy string) ([]*{{.upperStartCamelObject}}, error)
+	    // CountByCondition 根据条件获取总数
+        CountByCondition(ctx context.Context, countBuilder squirrel.SelectBuilder) (int64, error)
 	}
 
 	default{{.upperStartCamelObject}}Model struct {

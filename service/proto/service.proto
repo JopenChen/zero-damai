@@ -6,6 +6,14 @@ option go_package = "./service_pb";
 
 // 公共
 message EmptyResp {}
+message FilterItem {
+  string Field = 1;
+  string Value = 2;
+}
+message SortItem {
+  string Field = 1;
+  string Order = 2;
+}
 
 // Login 登录
 message LoginReq {
@@ -39,12 +47,38 @@ message  UserAddResp {
   int64 Id = 1; // 用户ID
 }
 
+// 获取演出活动列表
+message PerformanceRetrieveReq {
+    int64    Page = 1;              // 页码
+    int64    PageSize = 2;          // 页面数量
+    repeated FilterItem Filter = 3; // 过滤条件
+    repeated SortItem Sort = 4;     // 排序条件
+}
+message Performance {
+    int64  Id = 1;            // ID
+    string Title = 2;         // 标题
+    string Description = 3;   // 描述
+    string City = 4;          // 所在城市
+    string Address = 5;       // 具体地址
+    int64  PrioritySaleAt = 6;// 优先购开售时间
+    int64  SaleAt = 7;        // 开售时间
+    int64  CreatedAt = 8;     // 创建时间
+    int64  UpdatedAt = 9;     // 更新时间
+}
+message PerformanceRetrieveResp {
+    int64    Total = 1;
+    repeated Performance Data = 2;
+}
+
 service Service {
   // Login 登录
   rpc Login (LoginReq) returns (LoginResp);
 
   // UserAdd 用户注册
   rpc UserAdd (UserAddReq) returns (UserAddResp);
+
+  // PerformanceRetrieve 获取演出活动列表
+  rpc PerformanceRetrieve (PerformanceRetrieveReq) returns (PerformanceRetrieveResp);
 }
 
 service TestService {
