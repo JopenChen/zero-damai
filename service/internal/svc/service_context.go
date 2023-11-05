@@ -5,8 +5,8 @@ import (
 	"github.com/JopenChen/zero-damai/model/mysql/performance_seat"
 	"github.com/JopenChen/zero-damai/model/mysql/performance_session"
 	"github.com/JopenChen/zero-damai/model/mysql/user"
-	"github.com/JopenChen/zero-damai/service/internal/config"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
+	"service/internal/config"
 )
 
 type ServiceContext struct {

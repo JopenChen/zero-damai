@@ -4,8 +4,8 @@ import (
 	"context"
 	"github.com/JopenChen/zero-damai/service/client/service"
 
-	"github.com/JopenChen/zero-damai/gateway/internal/svc"
-	"github.com/JopenChen/zero-damai/gateway/internal/types"
+	"gateway/internal/svc"
+	"gateway/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -26,7 +26,7 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 
 func (l *LoginLogic) Login(req *types.LoginReq) (resp *types.LoginResp, err error) {
 	resp = new(types.LoginResp)
-	
+
 	rpcResp, err := l.svcCtx.ServiceRpc.Login(l.ctx, &service.LoginReq{
 		Mobile:    req.Mobile,
 		Password:  req.Password,

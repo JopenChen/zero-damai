@@ -2,12 +2,11 @@ package performance
 
 import (
 	"context"
+	"gateway/internal/svc"
+	"gateway/internal/types"
 	"github.com/JopenChen/zero-damai/common/global"
 	"github.com/JopenChen/zero-damai/service/client/service"
 	"github.com/bytedance/sonic"
-
-	"github.com/JopenChen/zero-damai/gateway/internal/svc"
-	"github.com/JopenChen/zero-damai/gateway/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

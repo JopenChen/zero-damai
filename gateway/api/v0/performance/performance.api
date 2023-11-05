@@ -1,8 +1,8 @@
 syntax = "v1"
 
 info(
-    title: "Performance"
-    desc: "演出活动相关接口"
+    title: "演出活动表"
+    desc: "演出活动表相关接口"
     author: "Jopen Chen"
     email: "18318159812@163.com"
     version: "v1.0.0"
@@ -10,34 +10,74 @@ info(
 
 type (
     Performance {
-        Id             int64  `json:"id"`               // ID
-        Title          string `json:"title"`            // 标题
-        Description    string `json:"description"`      // 描述
-        City           string `json:"city"`             // 所在城市
-        Address        string `json:"address"`          // 具体地址
-        PrioritySaleAt int64  `json:"priority_sale_at"` // 优先购开售时间
-        SaleAt         int64  `json:"sale_at"`          // 开售时间
-        CreatedAt      int64  `json:"created_at"`       // 创建时间
-        UpdatedAt      int64  `json:"updated_at"`       // 更新时间
+        Id int64 `json:"id"`    // ID
+        Title string `json:"title"`    // 标题
+        Description string `json:"description"`    // 描述
+        City string `json:"city"`    // 所在城市
+        Address string `json:"address"`    // 具体地址
+        PrioritySaleAt int64 `json:"priority_sale_at"`    // 优先购开售时间
+        SaleAt int64 `json:"sale_at"`    // 开售时间
+        CreatedAt int64 `json:"created_at"`    // 创建时间
+        UpdatedAt int64 `json:"updated_at"`    // 更新时间
+        IsDel int64 `json:"is_del"`    // 是否删除: 0=未指定、1=是、2=否: 默认=2
     }
-    // 获取演出活动列表
+    // 演出活动表 创建
+    PerformanceAddReq {
+        GeneralPathId
+        Id int64 `json:"id,optional"`    // ID
+        Title string `json:"title,optional"`    // 标题
+        Description string `json:"description,optional"`    // 描述
+        City string `json:"city,optional"`    // 所在城市
+        Address string `json:"address,optional"`    // 具体地址
+        PrioritySaleAt int64 `json:"priority_sale_at,optional"`    // 优先购开售时间
+        SaleAt int64 `json:"sale_at,optional"`    // 开售时间
+    }
+    PerformanceAddResp {
+        Id int64 `json:"id"` // ID
+    }
+
+    // 演出活动表 更新
+    PerformanceUpdateReq {
+        Id int64 `json:"id,optional"`    // ID
+        Title string `json:"title,optional"`    // 标题
+        Description string `json:"description,optional"`    // 描述
+        City string `json:"city,optional"`    // 所在城市
+        Address string `json:"address,optional"`    // 具体地址
+        PrioritySaleAt int64 `json:"priority_sale_at,optional"`    // 优先购开售时间
+        SaleAt int64 `json:"sale_at,optional"`    // 开售时间
+    }
+
+    // 演出活动表 获取
     PerformanceRetrieveReq {
         Paging
     }
     PerformanceRetrieveResp {
-        Total int64          `json:"total"` // 总数
-        Data  []*Performance `json:"data"`  // 演出活动列表
+        Total int64                   `json:"total"` // 总数
+        Data  []*Performance `json:"data"`  // 数据列表
     }
+
 )
 
 @server (
     group: v0/performance
-    jwt: Auth
-    //    middleware: CheckAuth
+//  jwt: Auth
+//  middleware: CheckAuth
     prefix: v0
 )
 service Gateway {
-    @doc "获取演出活动列表"
+    @doc "演出活动表 创建"
+    @handler PerformanceAdd
+    post /performance (PerformanceAddReq) returns (PerformanceAddResp)
+
+    @doc "演出活动表 更新"
+    @handler PerformanceUpdate
+    put /performance/:id (PerformanceUpdateReq) returns (Empty)
+
+    @doc "演出活动表 获取"
     @handler PerformanceRetrieve
     get /performance (PerformanceRetrieveReq) returns (PerformanceRetrieveResp)
+
+    @doc "演出活动表 删除"
+    @handler PerformanceRemove
+    delete /performance/:id (GeneralPathId) returns (Empty)
 }

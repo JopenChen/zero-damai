@@ -2,10 +2,9 @@ package user
 
 import (
 	"context"
+	"gateway/internal/svc"
+	"gateway/internal/types"
 	"github.com/JopenChen/zero-damai/service/client/service"
-
-	"github.com/JopenChen/zero-damai/gateway/internal/svc"
-	"github.com/JopenChen/zero-damai/gateway/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

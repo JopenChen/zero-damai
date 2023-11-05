@@ -15,6 +15,13 @@ message SortItem {
   string Order = 2;
 }
 
+message Paging {
+  int64    Page = 1;              // 页码
+  int64    PageSize = 2;          // 页面数量
+  repeated FilterItem Filter = 3; // 过滤条件
+  repeated SortItem Sort = 4;     // 排序条件
+}
+
 // Login 登录
 message LoginReq {
   string Mobile = 1;     // 账号
@@ -29,58 +36,382 @@ message LoginResp {
   int64  ExpireAt = 4;   // 认证过期时间
 }
 
-// UserAdd 用户注册
-message UserAddReq {
-  string Name = 1;     // 姓名
-  string Nickname = 2; // 昵称
-  string Avatar = 3;   // 头像
-  string Mobile = 4;   // 手机号
-  string Password = 5; // 密码
-  string Mail = 6;     // 邮箱地址
-  string Identity = 7; // 身份证号
-  int64  Gender = 8;   // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
-  string Nation = 9;   // 民族
-  int64  Birthday = 10;// 出生日期
-  string Address = 11; // 收货地址
-}
-message  UserAddResp {
-  int64 Id = 1; // 用户ID
-}
-
-// 获取演出活动列表
-message PerformanceRetrieveReq {
-    int64    Page = 1;              // 页码
-    int64    PageSize = 2;          // 页面数量
-    repeated FilterItem Filter = 3; // 过滤条件
-    repeated SortItem Sort = 4;     // 排序条件
-}
-message Performance {
-    int64  Id = 1;            // ID
-    string Title = 2;         // 标题
-    string Description = 3;   // 描述
-    string City = 4;          // 所在城市
-    string Address = 5;       // 具体地址
-    int64  PrioritySaleAt = 6;// 优先购开售时间
-    int64  SaleAt = 7;        // 开售时间
-    int64  CreatedAt = 8;     // 创建时间
-    int64  UpdatedAt = 9;     // 更新时间
-}
-message PerformanceRetrieveResp {
-    int64    Total = 1;
-    repeated Performance Data = 2;
-}
-
 service Service {
   // Login 登录
   rpc Login (LoginReq) returns (LoginResp);
-
-  // UserAdd 用户注册
-  rpc UserAdd (UserAddReq) returns (UserAddResp);
-
-  // PerformanceRetrieve 获取演出活动列表
-  rpc PerformanceRetrieve (PerformanceRetrieveReq) returns (PerformanceRetrieveResp);
 }
 
-service TestService {
-  rpc Login (LoginReq) returns (LoginResp);
+// 演出活动表
+message Performance {
+  int64 Id = 1; // 用户ID
+  string Name = 2; // 姓名
+  string Nickname = 3; // 昵称
+  string Avatar = 4; // 头像
+  string Background = 5; // 个人中心背景图
+  string Mobile = 6; // 手机号
+  string Password = 7; // 密码
+  string Mail = 8; // 邮箱地址
+  string Identity = 9; // 身份证号
+  int64 Gender = 10; // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
+  string Nation = 11; // 民族
+  int64 Birthday = 12; // 出生日期
+  string Address = 13; // 收货地址
+  string Audience = 14; // 观影人信息,格式：[{"name":"xxx","identity_type": 1,"identity_number"}],identity 可选值：1=身份证、2=港澳台居民居住证、3=港澳居民来往内地通行证、4=台湾居民来往大陆通行证、5=护照、6=外国人永久居留身份证
+  int64 Status = 15; // 是否禁用: 0=未指定、1=开启、2=禁用: 默认=1
+  int64 LoginAt = 16; // 登录时间
+  int64 CreatedAt = 17; // 创建时间
+  int64 UpdatedAt = 18; // 更新时间
+  int64 IsDel = 19; // 是否删除: 0=未指定、1=是、2=否: 默认=2
+}
+// PerformanceAdd 演出活动表 创建
+message PerformanceAddReq {
+  string Name = 1; // 姓名
+  string Nickname = 2; // 昵称
+  string Avatar = 3; // 头像
+  string Background = 4; // 个人中心背景图
+  string Mobile = 5; // 手机号
+  string Password = 6; // 密码
+  string Mail = 7; // 邮箱地址
+  string Identity = 8; // 身份证号
+  int64 Gender = 9; // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
+  string Nation = 10; // 民族
+  int64 Birthday = 11; // 出生日期
+  string Address = 12; // 收货地址
+  string Audience = 13; // 观影人信息,格式：[{"name":"xxx","identity_type": 1,"identity_number"}],identity 可选值：1=身份证、2=港澳台居民居住证、3=港澳居民来往内地通行证、4=台湾居民来往大陆通行证、5=护照、6=外国人永久居留身份证
+  int64 Status = 14; // 是否禁用: 0=未指定、1=开启、2=禁用: 默认=1
+  int64 LoginAt = 15; // 登录时间
+}
+message PerformanceAddResp {
+  int64 Id = 1; // 用户ID
+}
+
+// PerformanceUpdate 演出活动表 更新
+message PerformanceUpdateReq {
+  int64 Id = 1; // 用户ID
+  string Name = 2; // 姓名
+  string Nickname = 3; // 昵称
+  string Avatar = 4; // 头像
+  string Background = 5; // 个人中心背景图
+  string Mobile = 6; // 手机号
+  string Password = 7; // 密码
+  string Mail = 8; // 邮箱地址
+  string Identity = 9; // 身份证号
+  int64 Gender = 10; // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
+  string Nation = 11; // 民族
+  int64 Birthday = 12; // 出生日期
+  string Address = 13; // 收货地址
+  string Audience = 14; // 观影人信息,格式：[{"name":"xxx","identity_type": 1,"identity_number"}],identity 可选值：1=身份证、2=港澳台居民居住证、3=港澳居民来往内地通行证、4=台湾居民来往大陆通行证、5=护照、6=外国人永久居留身份证
+  int64 Status = 15; // 是否禁用: 0=未指定、1=开启、2=禁用: 默认=1
+  int64 LoginAt = 16; // 登录时间
+}
+
+// PerformanceRetrieve 演出活动表 获取
+message PerformanceRetrieveReq {
+  Paging Paging = 1;
+}
+message PerformanceRetrieveResp {
+  int64 Total = 1; // 总数
+  repeated Performance Data = 2; // 数据列表
+}
+
+// PerformanceRemove 演出活动表 删除
+message PerformanceRemoveReq {
+  int64 Id = 1; // 用户ID
+}
+
+service PerformanceService {
+  // PerformanceAdd 演出活动表 创建
+  rpc PerformanceAdd (PerformanceAddReq) returns (PerformanceAddResp);
+  // PerformanceUpdate 演出活动表 更新
+  rpc PerformanceUpdate (PerformanceUpdateReq) returns (EmptyResp);
+  // PerformanceRetrieve 演出活动表 获取
+  rpc PerformanceRetrieve (PerformanceRetrieveReq) returns (PerformanceRetrieveResp);
+  // PerformanceRemove 演出活动表 删除
+  rpc PerformanceRemove (PerformanceRemoveReq) returns (EmptyResp);
+}
+// 订单表
+message Order {
+  int64 Id = 1; // 用户ID
+  string Name = 2; // 姓名
+  string Nickname = 3; // 昵称
+  string Avatar = 4; // 头像
+  string Background = 5; // 个人中心背景图
+  string Mobile = 6; // 手机号
+  string Password = 7; // 密码
+  string Mail = 8; // 邮箱地址
+  string Identity = 9; // 身份证号
+  int64 Gender = 10; // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
+  string Nation = 11; // 民族
+  int64 Birthday = 12; // 出生日期
+  string Address = 13; // 收货地址
+  string Audience = 14; // 观影人信息,格式：[{"name":"xxx","identity_type": 1,"identity_number"}],identity 可选值：1=身份证、2=港澳台居民居住证、3=港澳居民来往内地通行证、4=台湾居民来往大陆通行证、5=护照、6=外国人永久居留身份证
+  int64 Status = 15; // 是否禁用: 0=未指定、1=开启、2=禁用: 默认=1
+  int64 LoginAt = 16; // 登录时间
+  int64 CreatedAt = 17; // 创建时间
+  int64 UpdatedAt = 18; // 更新时间
+  int64 IsDel = 19; // 是否删除: 0=未指定、1=是、2=否: 默认=2
+}
+// OrderAdd 订单表 创建
+message OrderAddReq {
+  string Name = 1; // 姓名
+  string Nickname = 2; // 昵称
+  string Avatar = 3; // 头像
+  string Background = 4; // 个人中心背景图
+  string Mobile = 5; // 手机号
+  string Password = 6; // 密码
+  string Mail = 7; // 邮箱地址
+  string Identity = 8; // 身份证号
+  int64 Gender = 9; // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
+  string Nation = 10; // 民族
+  int64 Birthday = 11; // 出生日期
+  string Address = 12; // 收货地址
+  string Audience = 13; // 观影人信息,格式：[{"name":"xxx","identity_type": 1,"identity_number"}],identity 可选值：1=身份证、2=港澳台居民居住证、3=港澳居民来往内地通行证、4=台湾居民来往大陆通行证、5=护照、6=外国人永久居留身份证
+  int64 Status = 14; // 是否禁用: 0=未指定、1=开启、2=禁用: 默认=1
+  int64 LoginAt = 15; // 登录时间
+}
+message OrderAddResp {
+  int64 Id = 1; // 用户ID
+}
+
+// OrderUpdate 订单表 更新
+message OrderUpdateReq {
+  int64 Id = 1; // 用户ID
+  string Name = 2; // 姓名
+  string Nickname = 3; // 昵称
+  string Avatar = 4; // 头像
+  string Background = 5; // 个人中心背景图
+  string Mobile = 6; // 手机号
+  string Password = 7; // 密码
+  string Mail = 8; // 邮箱地址
+  string Identity = 9; // 身份证号
+  int64 Gender = 10; // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
+  string Nation = 11; // 民族
+  int64 Birthday = 12; // 出生日期
+  string Address = 13; // 收货地址
+  string Audience = 14; // 观影人信息,格式：[{"name":"xxx","identity_type": 1,"identity_number"}],identity 可选值：1=身份证、2=港澳台居民居住证、3=港澳居民来往内地通行证、4=台湾居民来往大陆通行证、5=护照、6=外国人永久居留身份证
+  int64 Status = 15; // 是否禁用: 0=未指定、1=开启、2=禁用: 默认=1
+  int64 LoginAt = 16; // 登录时间
+}
+
+// OrderRetrieve 订单表 获取
+message OrderRetrieveReq {
+  Paging Paging = 1;
+}
+message OrderRetrieveResp {
+  int64 Total = 1; // 总数
+  repeated Order Data = 2; // 数据列表
+}
+
+// OrderRemove 订单表 删除
+message OrderRemoveReq {
+  int64 Id = 1; // 用户ID
+}
+
+service OrderService {
+  // OrderAdd 订单表 创建
+  rpc OrderAdd (OrderAddReq) returns (OrderAddResp);
+  // OrderUpdate 订单表 更新
+  rpc OrderUpdate (OrderUpdateReq) returns (EmptyResp);
+  // OrderRetrieve 订单表 获取
+  rpc OrderRetrieve (OrderRetrieveReq) returns (OrderRetrieveResp);
+  // OrderRemove 订单表 删除
+  rpc OrderRemove (OrderRemoveReq) returns (EmptyResp);
+}
+// 演出活动场次座位表
+message PerformanceSeat {
+  int64 Id = 1; // ID
+  int64 SessionId = 2; // 关联的演出场次ID
+  string Seat = 3; // 席位，对应演出活动场次表中的席位
+  int64 Row = 4; // 座位所在行
+  int64 Col = 5; // 座位所在列
+  int64 Status = 6; // 预定状态：1=已预定、2=未预定：默认=2
+  int64 CreatedAt = 7; // 创建时间
+  int64 UpdatedAt = 8; // 更新时间
+  int64 IsDel = 9; // 是否删除: 0=未指定、1=是、2=否: 默认=2
+}
+// PerformanceSeatAdd 演出活动场次座位表 创建
+message PerformanceSeatAddReq {
+  int64 SessionId = 1; // 关联的演出场次ID
+  string Seat = 2; // 席位，对应演出活动场次表中的席位
+  int64 Row = 3; // 座位所在行
+  int64 Col = 4; // 座位所在列
+  int64 Status = 5; // 预定状态：1=已预定、2=未预定：默认=2
+}
+message PerformanceSeatAddResp {
+  int64 Id = 1; // 用户ID
+}
+
+// PerformanceSeatUpdate 演出活动场次座位表 更新
+message PerformanceSeatUpdateReq {
+  int64 Id = 1; // ID
+  int64 SessionId = 2; // 关联的演出场次ID
+  string Seat = 3; // 席位，对应演出活动场次表中的席位
+  int64 Row = 4; // 座位所在行
+  int64 Col = 5; // 座位所在列
+  int64 Status = 6; // 预定状态：1=已预定、2=未预定：默认=2
+}
+
+// PerformanceSeatRetrieve 演出活动场次座位表 获取
+message PerformanceSeatRetrieveReq {
+  Paging Paging = 1;
+}
+message PerformanceSeatRetrieveResp {
+  int64 Total = 1; // 总数
+  repeated PerformanceSeat Data = 2; // 数据列表
+}
+
+// PerformanceSeatRemove 演出活动场次座位表 删除
+message PerformanceSeatRemoveReq {
+  int64 Id = 1; // 用户ID
+}
+
+service PerformanceSeatService {
+  // PerformanceSeatAdd 演出活动场次座位表 创建
+  rpc PerformanceSeatAdd (PerformanceSeatAddReq) returns (PerformanceSeatAddResp);
+  // PerformanceSeatUpdate 演出活动场次座位表 更新
+  rpc PerformanceSeatUpdate (PerformanceSeatUpdateReq) returns (EmptyResp);
+  // PerformanceSeatRetrieve 演出活动场次座位表 获取
+  rpc PerformanceSeatRetrieve (PerformanceSeatRetrieveReq) returns (PerformanceSeatRetrieveResp);
+  // PerformanceSeatRemove 演出活动场次座位表 删除
+  rpc PerformanceSeatRemove (PerformanceSeatRemoveReq) returns (EmptyResp);
+}
+// 演出活动场次表
+message PerformanceSession {
+  int64 Id = 1; // ID
+  int64 PerformanceId = 2; // 关联的演出活动ID
+  string Tickets = 3; // 规格票数，格式为：[{"seat": "vip","price": 2023,"quantity": 2000}]。seat: 席位、price: 票价、quantity: 数量。
+  int64 ShowAt = 4; // 演出时间
+  int64 CreatedAt = 5; // 创建时间
+  int64 UpdatedAt = 6; // 更新时间
+  int64 IsDel = 7; // 是否删除: 0=未指定、1=是、2=否: 默认=2
+}
+// PerformanceSessionAdd 演出活动场次表 创建
+message PerformanceSessionAddReq {
+  int64 PerformanceId = 1; // 关联的演出活动ID
+  string Tickets = 2; // 规格票数，格式为：[{"seat": "vip","price": 2023,"quantity": 2000}]。seat: 席位、price: 票价、quantity: 数量。
+  int64 ShowAt = 3; // 演出时间
+}
+message PerformanceSessionAddResp {
+  int64 Id = 1; // 用户ID
+}
+
+// PerformanceSessionUpdate 演出活动场次表 更新
+message PerformanceSessionUpdateReq {
+  int64 Id = 1; // ID
+  int64 PerformanceId = 2; // 关联的演出活动ID
+  string Tickets = 3; // 规格票数，格式为：[{"seat": "vip","price": 2023,"quantity": 2000}]。seat: 席位、price: 票价、quantity: 数量。
+  int64 ShowAt = 4; // 演出时间
+}
+
+// PerformanceSessionRetrieve 演出活动场次表 获取
+message PerformanceSessionRetrieveReq {
+  Paging Paging = 1;
+}
+message PerformanceSessionRetrieveResp {
+  int64 Total = 1; // 总数
+  repeated PerformanceSession Data = 2; // 数据列表
+}
+
+// PerformanceSessionRemove 演出活动场次表 删除
+message PerformanceSessionRemoveReq {
+  int64 Id = 1; // 用户ID
+}
+
+service PerformanceSessionService {
+  // PerformanceSessionAdd 演出活动场次表 创建
+  rpc PerformanceSessionAdd (PerformanceSessionAddReq) returns (PerformanceSessionAddResp);
+  // PerformanceSessionUpdate 演出活动场次表 更新
+  rpc PerformanceSessionUpdate (PerformanceSessionUpdateReq) returns (EmptyResp);
+  // PerformanceSessionRetrieve 演出活动场次表 获取
+  rpc PerformanceSessionRetrieve (PerformanceSessionRetrieveReq) returns (PerformanceSessionRetrieveResp);
+  // PerformanceSessionRemove 演出活动场次表 删除
+  rpc PerformanceSessionRemove (PerformanceSessionRemoveReq) returns (EmptyResp);
+}
+// 用户表
+message User {
+  int64 Id = 1; // 用户ID
+  string Name = 2; // 姓名
+  string Nickname = 3; // 昵称
+  string Avatar = 4; // 头像
+  string Background = 5; // 个人中心背景图
+  string Mobile = 6; // 手机号
+  string Password = 7; // 密码
+  string Mail = 8; // 邮箱地址
+  string Identity = 9; // 身份证号
+  int64 Gender = 10; // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
+  string Nation = 11; // 民族
+  int64 Birthday = 12; // 出生日期
+  string Address = 13; // 收货地址
+  string Audience = 14; // 观影人信息,格式：[{"name":"xxx","identity_type": 1,"identity_number"}],identity 可选值：1=身份证、2=港澳台居民居住证、3=港澳居民来往内地通行证、4=台湾居民来往大陆通行证、5=护照、6=外国人永久居留身份证
+  int64 Status = 15; // 是否禁用: 0=未指定、1=开启、2=禁用: 默认=1
+  int64 LoginAt = 16; // 登录时间
+  int64 CreatedAt = 17; // 创建时间
+  int64 UpdatedAt = 18; // 更新时间
+  int64 IsDel = 19; // 是否删除: 0=未指定、1=是、2=否: 默认=2
+}
+// UserAdd 用户表 创建
+message UserAddReq {
+  string Name = 1; // 姓名
+  string Nickname = 2; // 昵称
+  string Avatar = 3; // 头像
+  string Background = 4; // 个人中心背景图
+  string Mobile = 5; // 手机号
+  string Password = 6; // 密码
+  string Mail = 7; // 邮箱地址
+  string Identity = 8; // 身份证号
+  int64 Gender = 9; // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
+  string Nation = 10; // 民族
+  int64 Birthday = 11; // 出生日期
+  string Address = 12; // 收货地址
+  string Audience = 13; // 观影人信息,格式：[{"name":"xxx","identity_type": 1,"identity_number"}],identity 可选值：1=身份证、2=港澳台居民居住证、3=港澳居民来往内地通行证、4=台湾居民来往大陆通行证、5=护照、6=外国人永久居留身份证
+  int64 Status = 14; // 是否禁用: 0=未指定、1=开启、2=禁用: 默认=1
+  int64 LoginAt = 15; // 登录时间
+}
+message UserAddResp {
+  int64 Id = 1; // 用户ID
+}
+
+// UserUpdate 用户表 更新
+message UserUpdateReq {
+  int64 Id = 1; // 用户ID
+  string Name = 2; // 姓名
+  string Nickname = 3; // 昵称
+  string Avatar = 4; // 头像
+  string Background = 5; // 个人中心背景图
+  string Mobile = 6; // 手机号
+  string Password = 7; // 密码
+  string Mail = 8; // 邮箱地址
+  string Identity = 9; // 身份证号
+  int64 Gender = 10; // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
+  string Nation = 11; // 民族
+  int64 Birthday = 12; // 出生日期
+  string Address = 13; // 收货地址
+  string Audience = 14; // 观影人信息,格式：[{"name":"xxx","identity_type": 1,"identity_number"}],identity 可选值：1=身份证、2=港澳台居民居住证、3=港澳居民来往内地通行证、4=台湾居民来往大陆通行证、5=护照、6=外国人永久居留身份证
+  int64 Status = 15; // 是否禁用: 0=未指定、1=开启、2=禁用: 默认=1
+  int64 LoginAt = 16; // 登录时间
+}
+
+// UserRetrieve 用户表 获取
+message UserRetrieveReq {
+  Paging Paging = 1;
+}
+message UserRetrieveResp {
+  int64 Total = 1; // 总数
+  repeated User Data = 2; // 数据列表
+}
+
+// UserRemove 用户表 删除
+message UserRemoveReq {
+  int64 Id = 1; // 用户ID
+}
+
+service UserService {
+  // UserAdd 用户表 创建
+  rpc UserAdd (UserAddReq) returns (UserAddResp);
+  // UserUpdate 用户表 更新
+  rpc UserUpdate (UserUpdateReq) returns (EmptyResp);
+  // UserRetrieve 用户表 获取
+  rpc UserRetrieve (UserRetrieveReq) returns (UserRetrieveResp);
+  // UserRemove 用户表 删除
+  rpc UserRemove (UserRemoveReq) returns (EmptyResp);
 }

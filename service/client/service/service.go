@@ -6,31 +6,58 @@ package service
 import (
 	"context"
 
-	"github.com/JopenChen/zero-damai/service/service_pb"
+	"service/service_pb"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 
 type (
-	EmptyResp               = service_pb.EmptyResp
-	FilterItem              = service_pb.FilterItem
-	LoginReq                = service_pb.LoginReq
-	LoginResp               = service_pb.LoginResp
-	Performance             = service_pb.Performance
-	PerformanceRetrieveReq  = service_pb.PerformanceRetrieveReq
-	PerformanceRetrieveResp = service_pb.PerformanceRetrieveResp
-	SortItem                = service_pb.SortItem
-	UserAddReq              = service_pb.UserAddReq
-	UserAddResp             = service_pb.UserAddResp
+	EmptyResp                      = service_pb.EmptyResp
+	FilterItem                     = service_pb.FilterItem
+	LoginReq                       = service_pb.LoginReq
+	LoginResp                      = service_pb.LoginResp
+	Order                          = service_pb.Order
+	OrderAddReq                    = service_pb.OrderAddReq
+	OrderAddResp                   = service_pb.OrderAddResp
+	OrderRemoveReq                 = service_pb.OrderRemoveReq
+	OrderRetrieveReq               = service_pb.OrderRetrieveReq
+	OrderRetrieveResp              = service_pb.OrderRetrieveResp
+	OrderUpdateReq                 = service_pb.OrderUpdateReq
+	Paging                         = service_pb.Paging
+	Performance                    = service_pb.Performance
+	PerformanceAddReq              = service_pb.PerformanceAddReq
+	PerformanceAddResp             = service_pb.PerformanceAddResp
+	PerformanceRemoveReq           = service_pb.PerformanceRemoveReq
+	PerformanceRetrieveReq         = service_pb.PerformanceRetrieveReq
+	PerformanceRetrieveResp        = service_pb.PerformanceRetrieveResp
+	PerformanceSeat                = service_pb.PerformanceSeat
+	PerformanceSeatAddReq          = service_pb.PerformanceSeatAddReq
+	PerformanceSeatAddResp         = service_pb.PerformanceSeatAddResp
+	PerformanceSeatRemoveReq       = service_pb.PerformanceSeatRemoveReq
+	PerformanceSeatRetrieveReq     = service_pb.PerformanceSeatRetrieveReq
+	PerformanceSeatRetrieveResp    = service_pb.PerformanceSeatRetrieveResp
+	PerformanceSeatUpdateReq       = service_pb.PerformanceSeatUpdateReq
+	PerformanceSession             = service_pb.PerformanceSession
+	PerformanceSessionAddReq       = service_pb.PerformanceSessionAddReq
+	PerformanceSessionAddResp      = service_pb.PerformanceSessionAddResp
+	PerformanceSessionRemoveReq    = service_pb.PerformanceSessionRemoveReq
+	PerformanceSessionRetrieveReq  = service_pb.PerformanceSessionRetrieveReq
+	PerformanceSessionRetrieveResp = service_pb.PerformanceSessionRetrieveResp
+	PerformanceSessionUpdateReq    = service_pb.PerformanceSessionUpdateReq
+	PerformanceUpdateReq           = service_pb.PerformanceUpdateReq
+	SortItem                       = service_pb.SortItem
+	User                           = service_pb.User
+	UserAddReq                     = service_pb.UserAddReq
+	UserAddResp                    = service_pb.UserAddResp
+	UserRemoveReq                  = service_pb.UserRemoveReq
+	UserRetrieveReq                = service_pb.UserRetrieveReq
+	UserRetrieveResp               = service_pb.UserRetrieveResp
+	UserUpdateReq                  = service_pb.UserUpdateReq
 
 	Service interface {
 		// Login 登录
 		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
-		// UserAdd 用户注册
-		UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
-		// PerformanceRetrieve 获取演出活动列表
-		PerformanceRetrieve(ctx context.Context, in *PerformanceRetrieveReq, opts ...grpc.CallOption) (*PerformanceRetrieveResp, error)
 	}
 
 	defaultService struct {
@@ -48,16 +75,4 @@ func NewService(cli zrpc.Client) Service {
 func (m *defaultService) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
 	client := service_pb.NewServiceClient(m.cli.Conn())
 	return client.Login(ctx, in, opts...)
-}
-
-// UserAdd 用户注册
-func (m *defaultService) UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error) {
-	client := service_pb.NewServiceClient(m.cli.Conn())
-	return client.UserAdd(ctx, in, opts...)
-}
-
-// PerformanceRetrieve 获取演出活动列表
-func (m *defaultService) PerformanceRetrieve(ctx context.Context, in *PerformanceRetrieveReq, opts ...grpc.CallOption) (*PerformanceRetrieveResp, error) {
-	client := service_pb.NewServiceClient(m.cli.Conn())
-	return client.PerformanceRetrieve(ctx, in, opts...)
 }

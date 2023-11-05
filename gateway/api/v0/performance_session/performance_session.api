@@ -1,0 +1,74 @@
+syntax = "v1"
+
+info(
+    title: "演出活动场次表"
+    desc: "演出活动场次表相关接口"
+    author: "Jopen Chen"
+    email: "18318159812@163.com"
+    version: "v1.0.0"
+)
+
+type (
+    PerformanceSession {
+        Id int64 `json:"id"`    // ID
+        PerformanceId int64 `json:"performance_id"`    // 关联的演出活动ID
+        Tickets string `json:"tickets"`    // 规格票数，格式为：[{"seat": "vip","price": 2023,"quantity": 2000}]。seat: 席位、price: 票价、quantity: 数量。
+        ShowAt int64 `json:"show_at"`    // 演出时间
+        CreatedAt int64 `json:"created_at"`    // 创建时间
+        UpdatedAt int64 `json:"updated_at"`    // 更新时间
+        IsDel int64 `json:"is_del"`    // 是否删除: 0=未指定、1=是、2=否: 默认=2
+    }
+    // 演出活动场次表 创建
+    PerformanceSessionAddReq {
+        GeneralPathId
+        Id int64 `json:"id,optional"`    // ID
+        PerformanceId int64 `json:"performance_id,optional"`    // 关联的演出活动ID
+        Tickets string `json:"tickets,optional"`    // 规格票数，格式为：[{"seat": "vip","price": 2023,"quantity": 2000}]。seat: 席位、price: 票价、quantity: 数量。
+        ShowAt int64 `json:"show_at,optional"`    // 演出时间
+    }
+    PerformanceSessionAddResp {
+        Id int64 `json:"id"` // ID
+    }
+
+    // 演出活动场次表 更新
+    PerformanceSessionUpdateReq {
+        Id int64 `json:"id,optional"`    // ID
+        PerformanceId int64 `json:"performance_id,optional"`    // 关联的演出活动ID
+        Tickets string `json:"tickets,optional"`    // 规格票数，格式为：[{"seat": "vip","price": 2023,"quantity": 2000}]。seat: 席位、price: 票价、quantity: 数量。
+        ShowAt int64 `json:"show_at,optional"`    // 演出时间
+    }
+
+    // 演出活动场次表 获取
+    PerformanceSessionRetrieveReq {
+        Paging
+    }
+    PerformanceSessionRetrieveResp {
+        Total int64                   `json:"total"` // 总数
+        Data  []*PerformanceSession `json:"data"`  // 数据列表
+    }
+
+)
+
+@server (
+    group: v0/performanceSession
+//  jwt: Auth
+//  middleware: CheckAuth
+    prefix: v0
+)
+service Gateway {
+    @doc "演出活动场次表 创建"
+    @handler PerformanceSessionAdd
+    post /performanceSession (PerformanceSessionAddReq) returns (PerformanceSessionAddResp)
+
+    @doc "演出活动场次表 更新"
+    @handler PerformanceSessionUpdate
+    put /performanceSession/:id (PerformanceSessionUpdateReq) returns (Empty)
+
+    @doc "演出活动场次表 获取"
+    @handler PerformanceSessionRetrieve
+    get /performanceSession (PerformanceSessionRetrieveReq) returns (PerformanceSessionRetrieveResp)
+
+    @doc "演出活动场次表 删除"
+    @handler PerformanceSessionRemove
+    delete /performanceSession/:id (GeneralPathId) returns (Empty)
+}

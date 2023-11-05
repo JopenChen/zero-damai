@@ -6,23 +6,49 @@ package testservice
 import (
 	"context"
 
-	"github.com/JopenChen/zero-damai/service/service_pb"
+	"service/service_pb"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 )
 
 type (
-	EmptyResp               = service_pb.EmptyResp
-	FilterItem              = service_pb.FilterItem
-	LoginReq                = service_pb.LoginReq
-	LoginResp               = service_pb.LoginResp
-	Performance             = service_pb.Performance
-	PerformanceRetrieveReq  = service_pb.PerformanceRetrieveReq
-	PerformanceRetrieveResp = service_pb.PerformanceRetrieveResp
-	SortItem                = service_pb.SortItem
-	UserAddReq              = service_pb.UserAddReq
-	UserAddResp             = service_pb.UserAddResp
+	EmptyResp                      = service_pb.EmptyResp
+	FilterItem                     = service_pb.FilterItem
+	LoginReq                       = service_pb.LoginReq
+	LoginResp                      = service_pb.LoginResp
+	Order                          = service_pb.Order
+	OrderAddReq                    = service_pb.OrderAddReq
+	OrderAddResp                   = service_pb.OrderAddResp
+	OrderRemoveReq                 = service_pb.OrderRemoveReq
+	OrderRetrieveReq               = service_pb.OrderRetrieveReq
+	OrderRetrieveResp              = service_pb.OrderRetrieveResp
+	OrderUpdateReq                 = service_pb.OrderUpdateReq
+	Paging                         = service_pb.Paging
+	Performance                    = service_pb.Performance
+	PerformanceAddReq              = service_pb.PerformanceAddReq
+	PerformanceAddResp             = service_pb.PerformanceAddResp
+	PerformanceRemoveReq           = service_pb.PerformanceRemoveReq
+	PerformanceRetrieveReq         = service_pb.PerformanceRetrieveReq
+	PerformanceRetrieveResp        = service_pb.PerformanceRetrieveResp
+	PerformanceSeat                = service_pb.PerformanceSeat
+	PerformanceSeatAddReq          = service_pb.PerformanceSeatAddReq
+	PerformanceSeatAddResp         = service_pb.PerformanceSeatAddResp
+	PerformanceSeatRemoveReq       = service_pb.PerformanceSeatRemoveReq
+	PerformanceSeatRetrieveReq     = service_pb.PerformanceSeatRetrieveReq
+	PerformanceSeatRetrieveResp    = service_pb.PerformanceSeatRetrieveResp
+	PerformanceSeatUpdateReq       = service_pb.PerformanceSeatUpdateReq
+	PerformanceSession             = service_pb.PerformanceSession
+	PerformanceSessionAddReq       = service_pb.PerformanceSessionAddReq
+	PerformanceSessionAddResp      = service_pb.PerformanceSessionAddResp
+	PerformanceSessionRemoveReq    = service_pb.PerformanceSessionRemoveReq
+	PerformanceSessionRetrieveReq  = service_pb.PerformanceSessionRetrieveReq
+	PerformanceSessionRetrieveResp = service_pb.PerformanceSessionRetrieveResp
+	PerformanceSessionUpdateReq    = service_pb.PerformanceSessionUpdateReq
+	PerformanceUpdateReq           = service_pb.PerformanceUpdateReq
+	SortItem                       = service_pb.SortItem
+	UserAddReq                     = service_pb.UserAddReq
+	UserAddResp                    = service_pb.UserAddResp
 
 	TestService interface {
 		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)

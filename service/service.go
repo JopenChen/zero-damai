@@ -4,11 +4,15 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/JopenChen/zero-damai/service/internal/config"
-	serviceServer "github.com/JopenChen/zero-damai/service/internal/server/service"
-	testserviceServer "github.com/JopenChen/zero-damai/service/internal/server/testservice"
-	"github.com/JopenChen/zero-damai/service/internal/svc"
-	"github.com/JopenChen/zero-damai/service/service_pb"
+	"service/internal/config"
+	orderserviceServer "service/internal/server/orderservice"
+	performanceseatserviceServer "service/internal/server/performanceseatservice"
+	performanceserviceServer "service/internal/server/performanceservice"
+	performancesessionserviceServer "service/internal/server/performancesessionservice"
+	serviceServer "service/internal/server/service"
+	userserviceServer "service/internal/server/userservice"
+	"service/internal/svc"
+	"service/service_pb"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
@@ -28,7 +32,11 @@ func main() {
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		service_pb.RegisterServiceServer(grpcServer, serviceServer.NewServiceServer(ctx))
-		service_pb.RegisterTestServiceServer(grpcServer, testserviceServer.NewTestServiceServer(ctx))
+		service_pb.RegisterPerformanceServiceServer(grpcServer, performanceserviceServer.NewPerformanceServiceServer(ctx))
+		service_pb.RegisterOrderServiceServer(grpcServer, orderserviceServer.NewOrderServiceServer(ctx))
+		service_pb.RegisterPerformanceSeatServiceServer(grpcServer, performanceseatserviceServer.NewPerformanceSeatServiceServer(ctx))
+		service_pb.RegisterPerformanceSessionServiceServer(grpcServer, performancesessionserviceServer.NewPerformanceSessionServiceServer(ctx))
+		service_pb.RegisterUserServiceServer(grpcServer, userserviceServer.NewUserServiceServer(ctx))
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

@@ -1,7 +1,7 @@
 package svc
 
 import (
-	"github.com/JopenChen/zero-damai/gateway/internal/config"
+	"gateway/internal/config"
 	"github.com/JopenChen/zero-damai/service/client/service"
 	"github.com/JopenChen/zero-damai/service/client/testservice"
 	"github.com/zeromicro/go-zero/zrpc"

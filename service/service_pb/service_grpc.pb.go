@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v3.19.4
-// source: service/proto/service.proto
+// source: service.proto
 
 package service_pb
 
@@ -19,9 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Service_Login_FullMethodName               = "/service.Service/Login"
-	Service_UserAdd_FullMethodName             = "/service.Service/UserAdd"
-	Service_PerformanceRetrieve_FullMethodName = "/service.Service/PerformanceRetrieve"
+	Service_Login_FullMethodName = "/service.Service/Login"
 )
 
 // ServiceClient is the client API for Service service.
@@ -30,10 +28,6 @@ const (
 type ServiceClient interface {
 	// Login 登录
 	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
-	// UserAdd 用户注册
-	UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
-	// PerformanceRetrieve 获取演出活动列表
-	PerformanceRetrieve(ctx context.Context, in *PerformanceRetrieveReq, opts ...grpc.CallOption) (*PerformanceRetrieveResp, error)
 }
 
 type serviceClient struct {
@@ -53,34 +47,12 @@ func (c *serviceClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.Ca
 	return out, nil
 }
 
-func (c *serviceClient) UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error) {
-	out := new(UserAddResp)
-	err := c.cc.Invoke(ctx, Service_UserAdd_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *serviceClient) PerformanceRetrieve(ctx context.Context, in *PerformanceRetrieveReq, opts ...grpc.CallOption) (*PerformanceRetrieveResp, error) {
-	out := new(PerformanceRetrieveResp)
-	err := c.cc.Invoke(ctx, Service_PerformanceRetrieve_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ServiceServer is the server API for Service service.
 // All implementations must embed UnimplementedServiceServer
 // for forward compatibility
 type ServiceServer interface {
 	// Login 登录
 	Login(context.Context, *LoginReq) (*LoginResp, error)
-	// UserAdd 用户注册
-	UserAdd(context.Context, *UserAddReq) (*UserAddResp, error)
-	// PerformanceRetrieve 获取演出活动列表
-	PerformanceRetrieve(context.Context, *PerformanceRetrieveReq) (*PerformanceRetrieveResp, error)
 	mustEmbedUnimplementedServiceServer()
 }
 
@@ -90,12 +62,6 @@ type UnimplementedServiceServer struct {
 
 func (UnimplementedServiceServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
-}
-func (UnimplementedServiceServer) UserAdd(context.Context, *UserAddReq) (*UserAddResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UserAdd not implemented")
-}
-func (UnimplementedServiceServer) PerformanceRetrieve(context.Context, *PerformanceRetrieveReq) (*PerformanceRetrieveResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PerformanceRetrieve not implemented")
 }
 func (UnimplementedServiceServer) mustEmbedUnimplementedServiceServer() {}
 
@@ -128,42 +94,6 @@ func _Service_Login_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_UserAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserAddReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceServer).UserAdd(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Service_UserAdd_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).UserAdd(ctx, req.(*UserAddReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Service_PerformanceRetrieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PerformanceRetrieveReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ServiceServer).PerformanceRetrieve(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Service_PerformanceRetrieve_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).PerformanceRetrieve(ctx, req.(*PerformanceRetrieveReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Service_ServiceDesc is the grpc.ServiceDesc for Service service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -175,105 +105,1054 @@ var Service_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "Login",
 			Handler:    _Service_Login_Handler,
 		},
-		{
-			MethodName: "UserAdd",
-			Handler:    _Service_UserAdd_Handler,
-		},
-		{
-			MethodName: "PerformanceRetrieve",
-			Handler:    _Service_PerformanceRetrieve_Handler,
-		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "service/proto/service.proto",
+	Metadata: "service.proto",
 }
 
 const (
-	TestService_Login_FullMethodName = "/service.TestService/Login"
+	PerformanceService_PerformanceAdd_FullMethodName      = "/service.PerformanceService/PerformanceAdd"
+	PerformanceService_PerformanceUpdate_FullMethodName   = "/service.PerformanceService/PerformanceUpdate"
+	PerformanceService_PerformanceRetrieve_FullMethodName = "/service.PerformanceService/PerformanceRetrieve"
+	PerformanceService_PerformanceRemove_FullMethodName   = "/service.PerformanceService/PerformanceRemove"
 )
 
-// TestServiceClient is the client API for TestService service.
+// PerformanceServiceClient is the client API for PerformanceService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type TestServiceClient interface {
-	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
+type PerformanceServiceClient interface {
+	// PerformanceAdd 演出活动表 创建
+	PerformanceAdd(ctx context.Context, in *PerformanceAddReq, opts ...grpc.CallOption) (*PerformanceAddResp, error)
+	// PerformanceUpdate 演出活动表 更新
+	PerformanceUpdate(ctx context.Context, in *PerformanceUpdateReq, opts ...grpc.CallOption) (*EmptyResp, error)
+	// PerformanceRetrieve 演出活动表 获取
+	PerformanceRetrieve(ctx context.Context, in *PerformanceRetrieveReq, opts ...grpc.CallOption) (*PerformanceRetrieveResp, error)
+	// PerformanceRemove 演出活动表 删除
+	PerformanceRemove(ctx context.Context, in *PerformanceRemoveReq, opts ...grpc.CallOption) (*EmptyResp, error)
 }
 
-type testServiceClient struct {
+type performanceServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewTestServiceClient(cc grpc.ClientConnInterface) TestServiceClient {
-	return &testServiceClient{cc}
+func NewPerformanceServiceClient(cc grpc.ClientConnInterface) PerformanceServiceClient {
+	return &performanceServiceClient{cc}
 }
 
-func (c *testServiceClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
-	out := new(LoginResp)
-	err := c.cc.Invoke(ctx, TestService_Login_FullMethodName, in, out, opts...)
+func (c *performanceServiceClient) PerformanceAdd(ctx context.Context, in *PerformanceAddReq, opts ...grpc.CallOption) (*PerformanceAddResp, error) {
+	out := new(PerformanceAddResp)
+	err := c.cc.Invoke(ctx, PerformanceService_PerformanceAdd_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// TestServiceServer is the server API for TestService service.
-// All implementations must embed UnimplementedTestServiceServer
+func (c *performanceServiceClient) PerformanceUpdate(ctx context.Context, in *PerformanceUpdateReq, opts ...grpc.CallOption) (*EmptyResp, error) {
+	out := new(EmptyResp)
+	err := c.cc.Invoke(ctx, PerformanceService_PerformanceUpdate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *performanceServiceClient) PerformanceRetrieve(ctx context.Context, in *PerformanceRetrieveReq, opts ...grpc.CallOption) (*PerformanceRetrieveResp, error) {
+	out := new(PerformanceRetrieveResp)
+	err := c.cc.Invoke(ctx, PerformanceService_PerformanceRetrieve_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *performanceServiceClient) PerformanceRemove(ctx context.Context, in *PerformanceRemoveReq, opts ...grpc.CallOption) (*EmptyResp, error) {
+	out := new(EmptyResp)
+	err := c.cc.Invoke(ctx, PerformanceService_PerformanceRemove_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PerformanceServiceServer is the server API for PerformanceService service.
+// All implementations must embed UnimplementedPerformanceServiceServer
 // for forward compatibility
-type TestServiceServer interface {
-	Login(context.Context, *LoginReq) (*LoginResp, error)
-	mustEmbedUnimplementedTestServiceServer()
+type PerformanceServiceServer interface {
+	// PerformanceAdd 演出活动表 创建
+	PerformanceAdd(context.Context, *PerformanceAddReq) (*PerformanceAddResp, error)
+	// PerformanceUpdate 演出活动表 更新
+	PerformanceUpdate(context.Context, *PerformanceUpdateReq) (*EmptyResp, error)
+	// PerformanceRetrieve 演出活动表 获取
+	PerformanceRetrieve(context.Context, *PerformanceRetrieveReq) (*PerformanceRetrieveResp, error)
+	// PerformanceRemove 演出活动表 删除
+	PerformanceRemove(context.Context, *PerformanceRemoveReq) (*EmptyResp, error)
+	mustEmbedUnimplementedPerformanceServiceServer()
 }
 
-// UnimplementedTestServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedTestServiceServer struct {
+// UnimplementedPerformanceServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedPerformanceServiceServer struct {
 }
 
-func (UnimplementedTestServiceServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+func (UnimplementedPerformanceServiceServer) PerformanceAdd(context.Context, *PerformanceAddReq) (*PerformanceAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PerformanceAdd not implemented")
 }
-func (UnimplementedTestServiceServer) mustEmbedUnimplementedTestServiceServer() {}
+func (UnimplementedPerformanceServiceServer) PerformanceUpdate(context.Context, *PerformanceUpdateReq) (*EmptyResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PerformanceUpdate not implemented")
+}
+func (UnimplementedPerformanceServiceServer) PerformanceRetrieve(context.Context, *PerformanceRetrieveReq) (*PerformanceRetrieveResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PerformanceRetrieve not implemented")
+}
+func (UnimplementedPerformanceServiceServer) PerformanceRemove(context.Context, *PerformanceRemoveReq) (*EmptyResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PerformanceRemove not implemented")
+}
+func (UnimplementedPerformanceServiceServer) mustEmbedUnimplementedPerformanceServiceServer() {}
 
-// UnsafeTestServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to TestServiceServer will
+// UnsafePerformanceServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PerformanceServiceServer will
 // result in compilation errors.
-type UnsafeTestServiceServer interface {
-	mustEmbedUnimplementedTestServiceServer()
+type UnsafePerformanceServiceServer interface {
+	mustEmbedUnimplementedPerformanceServiceServer()
 }
 
-func RegisterTestServiceServer(s grpc.ServiceRegistrar, srv TestServiceServer) {
-	s.RegisterService(&TestService_ServiceDesc, srv)
+func RegisterPerformanceServiceServer(s grpc.ServiceRegistrar, srv PerformanceServiceServer) {
+	s.RegisterService(&PerformanceService_ServiceDesc, srv)
 }
 
-func _TestService_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginReq)
+func _PerformanceService_PerformanceAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PerformanceAddReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TestServiceServer).Login(ctx, in)
+		return srv.(PerformanceServiceServer).PerformanceAdd(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TestService_Login_FullMethodName,
+		FullMethod: PerformanceService_PerformanceAdd_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TestServiceServer).Login(ctx, req.(*LoginReq))
+		return srv.(PerformanceServiceServer).PerformanceAdd(ctx, req.(*PerformanceAddReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// TestService_ServiceDesc is the grpc.ServiceDesc for TestService service.
+func _PerformanceService_PerformanceUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PerformanceUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PerformanceServiceServer).PerformanceUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PerformanceService_PerformanceUpdate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PerformanceServiceServer).PerformanceUpdate(ctx, req.(*PerformanceUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PerformanceService_PerformanceRetrieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PerformanceRetrieveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PerformanceServiceServer).PerformanceRetrieve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PerformanceService_PerformanceRetrieve_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PerformanceServiceServer).PerformanceRetrieve(ctx, req.(*PerformanceRetrieveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PerformanceService_PerformanceRemove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PerformanceRemoveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PerformanceServiceServer).PerformanceRemove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PerformanceService_PerformanceRemove_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PerformanceServiceServer).PerformanceRemove(ctx, req.(*PerformanceRemoveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PerformanceService_ServiceDesc is the grpc.ServiceDesc for PerformanceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var TestService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "service.TestService",
-	HandlerType: (*TestServiceServer)(nil),
+var PerformanceService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "service.PerformanceService",
+	HandlerType: (*PerformanceServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Login",
-			Handler:    _TestService_Login_Handler,
+			MethodName: "PerformanceAdd",
+			Handler:    _PerformanceService_PerformanceAdd_Handler,
+		},
+		{
+			MethodName: "PerformanceUpdate",
+			Handler:    _PerformanceService_PerformanceUpdate_Handler,
+		},
+		{
+			MethodName: "PerformanceRetrieve",
+			Handler:    _PerformanceService_PerformanceRetrieve_Handler,
+		},
+		{
+			MethodName: "PerformanceRemove",
+			Handler:    _PerformanceService_PerformanceRemove_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "service/proto/service.proto",
+	Metadata: "service.proto",
+}
+
+const (
+	OrderService_OrderAdd_FullMethodName      = "/service.OrderService/OrderAdd"
+	OrderService_OrderUpdate_FullMethodName   = "/service.OrderService/OrderUpdate"
+	OrderService_OrderRetrieve_FullMethodName = "/service.OrderService/OrderRetrieve"
+	OrderService_OrderRemove_FullMethodName   = "/service.OrderService/OrderRemove"
+)
+
+// OrderServiceClient is the client API for OrderService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type OrderServiceClient interface {
+	// OrderAdd 订单表 创建
+	OrderAdd(ctx context.Context, in *OrderAddReq, opts ...grpc.CallOption) (*OrderAddResp, error)
+	// OrderUpdate 订单表 更新
+	OrderUpdate(ctx context.Context, in *OrderUpdateReq, opts ...grpc.CallOption) (*EmptyResp, error)
+	// OrderRetrieve 订单表 获取
+	OrderRetrieve(ctx context.Context, in *OrderRetrieveReq, opts ...grpc.CallOption) (*OrderRetrieveResp, error)
+	// OrderRemove 订单表 删除
+	OrderRemove(ctx context.Context, in *OrderRemoveReq, opts ...grpc.CallOption) (*EmptyResp, error)
+}
+
+type orderServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewOrderServiceClient(cc grpc.ClientConnInterface) OrderServiceClient {
+	return &orderServiceClient{cc}
+}
+
+func (c *orderServiceClient) OrderAdd(ctx context.Context, in *OrderAddReq, opts ...grpc.CallOption) (*OrderAddResp, error) {
+	out := new(OrderAddResp)
+	err := c.cc.Invoke(ctx, OrderService_OrderAdd_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) OrderUpdate(ctx context.Context, in *OrderUpdateReq, opts ...grpc.CallOption) (*EmptyResp, error) {
+	out := new(EmptyResp)
+	err := c.cc.Invoke(ctx, OrderService_OrderUpdate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) OrderRetrieve(ctx context.Context, in *OrderRetrieveReq, opts ...grpc.CallOption) (*OrderRetrieveResp, error) {
+	out := new(OrderRetrieveResp)
+	err := c.cc.Invoke(ctx, OrderService_OrderRetrieve_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderServiceClient) OrderRemove(ctx context.Context, in *OrderRemoveReq, opts ...grpc.CallOption) (*EmptyResp, error) {
+	out := new(EmptyResp)
+	err := c.cc.Invoke(ctx, OrderService_OrderRemove_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// OrderServiceServer is the server API for OrderService service.
+// All implementations must embed UnimplementedOrderServiceServer
+// for forward compatibility
+type OrderServiceServer interface {
+	// OrderAdd 订单表 创建
+	OrderAdd(context.Context, *OrderAddReq) (*OrderAddResp, error)
+	// OrderUpdate 订单表 更新
+	OrderUpdate(context.Context, *OrderUpdateReq) (*EmptyResp, error)
+	// OrderRetrieve 订单表 获取
+	OrderRetrieve(context.Context, *OrderRetrieveReq) (*OrderRetrieveResp, error)
+	// OrderRemove 订单表 删除
+	OrderRemove(context.Context, *OrderRemoveReq) (*EmptyResp, error)
+	mustEmbedUnimplementedOrderServiceServer()
+}
+
+// UnimplementedOrderServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedOrderServiceServer struct {
+}
+
+func (UnimplementedOrderServiceServer) OrderAdd(context.Context, *OrderAddReq) (*OrderAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderAdd not implemented")
+}
+func (UnimplementedOrderServiceServer) OrderUpdate(context.Context, *OrderUpdateReq) (*EmptyResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderUpdate not implemented")
+}
+func (UnimplementedOrderServiceServer) OrderRetrieve(context.Context, *OrderRetrieveReq) (*OrderRetrieveResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderRetrieve not implemented")
+}
+func (UnimplementedOrderServiceServer) OrderRemove(context.Context, *OrderRemoveReq) (*EmptyResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OrderRemove not implemented")
+}
+func (UnimplementedOrderServiceServer) mustEmbedUnimplementedOrderServiceServer() {}
+
+// UnsafeOrderServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OrderServiceServer will
+// result in compilation errors.
+type UnsafeOrderServiceServer interface {
+	mustEmbedUnimplementedOrderServiceServer()
+}
+
+func RegisterOrderServiceServer(s grpc.ServiceRegistrar, srv OrderServiceServer) {
+	s.RegisterService(&OrderService_ServiceDesc, srv)
+}
+
+func _OrderService_OrderAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OrderAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).OrderAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_OrderAdd_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).OrderAdd(ctx, req.(*OrderAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_OrderUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OrderUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).OrderUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_OrderUpdate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).OrderUpdate(ctx, req.(*OrderUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_OrderRetrieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OrderRetrieveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).OrderRetrieve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_OrderRetrieve_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).OrderRetrieve(ctx, req.(*OrderRetrieveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrderService_OrderRemove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OrderRemoveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrderServiceServer).OrderRemove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OrderService_OrderRemove_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrderServiceServer).OrderRemove(ctx, req.(*OrderRemoveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// OrderService_ServiceDesc is the grpc.ServiceDesc for OrderService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var OrderService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "service.OrderService",
+	HandlerType: (*OrderServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "OrderAdd",
+			Handler:    _OrderService_OrderAdd_Handler,
+		},
+		{
+			MethodName: "OrderUpdate",
+			Handler:    _OrderService_OrderUpdate_Handler,
+		},
+		{
+			MethodName: "OrderRetrieve",
+			Handler:    _OrderService_OrderRetrieve_Handler,
+		},
+		{
+			MethodName: "OrderRemove",
+			Handler:    _OrderService_OrderRemove_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
+	PerformanceSeatService_PerformanceSeatAdd_FullMethodName      = "/service.PerformanceSeatService/PerformanceSeatAdd"
+	PerformanceSeatService_PerformanceSeatUpdate_FullMethodName   = "/service.PerformanceSeatService/PerformanceSeatUpdate"
+	PerformanceSeatService_PerformanceSeatRetrieve_FullMethodName = "/service.PerformanceSeatService/PerformanceSeatRetrieve"
+	PerformanceSeatService_PerformanceSeatRemove_FullMethodName   = "/service.PerformanceSeatService/PerformanceSeatRemove"
+)
+
+// PerformanceSeatServiceClient is the client API for PerformanceSeatService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type PerformanceSeatServiceClient interface {
+	// PerformanceSeatAdd 演出活动场次座位表 创建
+	PerformanceSeatAdd(ctx context.Context, in *PerformanceSeatAddReq, opts ...grpc.CallOption) (*PerformanceSeatAddResp, error)
+	// PerformanceSeatUpdate 演出活动场次座位表 更新
+	PerformanceSeatUpdate(ctx context.Context, in *PerformanceSeatUpdateReq, opts ...grpc.CallOption) (*EmptyResp, error)
+	// PerformanceSeatRetrieve 演出活动场次座位表 获取
+	PerformanceSeatRetrieve(ctx context.Context, in *PerformanceSeatRetrieveReq, opts ...grpc.CallOption) (*PerformanceSeatRetrieveResp, error)
+	// PerformanceSeatRemove 演出活动场次座位表 删除
+	PerformanceSeatRemove(ctx context.Context, in *PerformanceSeatRemoveReq, opts ...grpc.CallOption) (*EmptyResp, error)
+}
+
+type performanceSeatServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPerformanceSeatServiceClient(cc grpc.ClientConnInterface) PerformanceSeatServiceClient {
+	return &performanceSeatServiceClient{cc}
+}
+
+func (c *performanceSeatServiceClient) PerformanceSeatAdd(ctx context.Context, in *PerformanceSeatAddReq, opts ...grpc.CallOption) (*PerformanceSeatAddResp, error) {
+	out := new(PerformanceSeatAddResp)
+	err := c.cc.Invoke(ctx, PerformanceSeatService_PerformanceSeatAdd_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *performanceSeatServiceClient) PerformanceSeatUpdate(ctx context.Context, in *PerformanceSeatUpdateReq, opts ...grpc.CallOption) (*EmptyResp, error) {
+	out := new(EmptyResp)
+	err := c.cc.Invoke(ctx, PerformanceSeatService_PerformanceSeatUpdate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *performanceSeatServiceClient) PerformanceSeatRetrieve(ctx context.Context, in *PerformanceSeatRetrieveReq, opts ...grpc.CallOption) (*PerformanceSeatRetrieveResp, error) {
+	out := new(PerformanceSeatRetrieveResp)
+	err := c.cc.Invoke(ctx, PerformanceSeatService_PerformanceSeatRetrieve_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *performanceSeatServiceClient) PerformanceSeatRemove(ctx context.Context, in *PerformanceSeatRemoveReq, opts ...grpc.CallOption) (*EmptyResp, error) {
+	out := new(EmptyResp)
+	err := c.cc.Invoke(ctx, PerformanceSeatService_PerformanceSeatRemove_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PerformanceSeatServiceServer is the server API for PerformanceSeatService service.
+// All implementations must embed UnimplementedPerformanceSeatServiceServer
+// for forward compatibility
+type PerformanceSeatServiceServer interface {
+	// PerformanceSeatAdd 演出活动场次座位表 创建
+	PerformanceSeatAdd(context.Context, *PerformanceSeatAddReq) (*PerformanceSeatAddResp, error)
+	// PerformanceSeatUpdate 演出活动场次座位表 更新
+	PerformanceSeatUpdate(context.Context, *PerformanceSeatUpdateReq) (*EmptyResp, error)
+	// PerformanceSeatRetrieve 演出活动场次座位表 获取
+	PerformanceSeatRetrieve(context.Context, *PerformanceSeatRetrieveReq) (*PerformanceSeatRetrieveResp, error)
+	// PerformanceSeatRemove 演出活动场次座位表 删除
+	PerformanceSeatRemove(context.Context, *PerformanceSeatRemoveReq) (*EmptyResp, error)
+	mustEmbedUnimplementedPerformanceSeatServiceServer()
+}
+
+// UnimplementedPerformanceSeatServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedPerformanceSeatServiceServer struct {
+}
+
+func (UnimplementedPerformanceSeatServiceServer) PerformanceSeatAdd(context.Context, *PerformanceSeatAddReq) (*PerformanceSeatAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PerformanceSeatAdd not implemented")
+}
+func (UnimplementedPerformanceSeatServiceServer) PerformanceSeatUpdate(context.Context, *PerformanceSeatUpdateReq) (*EmptyResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PerformanceSeatUpdate not implemented")
+}
+func (UnimplementedPerformanceSeatServiceServer) PerformanceSeatRetrieve(context.Context, *PerformanceSeatRetrieveReq) (*PerformanceSeatRetrieveResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PerformanceSeatRetrieve not implemented")
+}
+func (UnimplementedPerformanceSeatServiceServer) PerformanceSeatRemove(context.Context, *PerformanceSeatRemoveReq) (*EmptyResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PerformanceSeatRemove not implemented")
+}
+func (UnimplementedPerformanceSeatServiceServer) mustEmbedUnimplementedPerformanceSeatServiceServer() {
+}
+
+// UnsafePerformanceSeatServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PerformanceSeatServiceServer will
+// result in compilation errors.
+type UnsafePerformanceSeatServiceServer interface {
+	mustEmbedUnimplementedPerformanceSeatServiceServer()
+}
+
+func RegisterPerformanceSeatServiceServer(s grpc.ServiceRegistrar, srv PerformanceSeatServiceServer) {
+	s.RegisterService(&PerformanceSeatService_ServiceDesc, srv)
+}
+
+func _PerformanceSeatService_PerformanceSeatAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PerformanceSeatAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PerformanceSeatServiceServer).PerformanceSeatAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PerformanceSeatService_PerformanceSeatAdd_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PerformanceSeatServiceServer).PerformanceSeatAdd(ctx, req.(*PerformanceSeatAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PerformanceSeatService_PerformanceSeatUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PerformanceSeatUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PerformanceSeatServiceServer).PerformanceSeatUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PerformanceSeatService_PerformanceSeatUpdate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PerformanceSeatServiceServer).PerformanceSeatUpdate(ctx, req.(*PerformanceSeatUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PerformanceSeatService_PerformanceSeatRetrieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PerformanceSeatRetrieveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PerformanceSeatServiceServer).PerformanceSeatRetrieve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PerformanceSeatService_PerformanceSeatRetrieve_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PerformanceSeatServiceServer).PerformanceSeatRetrieve(ctx, req.(*PerformanceSeatRetrieveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PerformanceSeatService_PerformanceSeatRemove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PerformanceSeatRemoveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PerformanceSeatServiceServer).PerformanceSeatRemove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PerformanceSeatService_PerformanceSeatRemove_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PerformanceSeatServiceServer).PerformanceSeatRemove(ctx, req.(*PerformanceSeatRemoveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PerformanceSeatService_ServiceDesc is the grpc.ServiceDesc for PerformanceSeatService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var PerformanceSeatService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "service.PerformanceSeatService",
+	HandlerType: (*PerformanceSeatServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "PerformanceSeatAdd",
+			Handler:    _PerformanceSeatService_PerformanceSeatAdd_Handler,
+		},
+		{
+			MethodName: "PerformanceSeatUpdate",
+			Handler:    _PerformanceSeatService_PerformanceSeatUpdate_Handler,
+		},
+		{
+			MethodName: "PerformanceSeatRetrieve",
+			Handler:    _PerformanceSeatService_PerformanceSeatRetrieve_Handler,
+		},
+		{
+			MethodName: "PerformanceSeatRemove",
+			Handler:    _PerformanceSeatService_PerformanceSeatRemove_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
+	PerformanceSessionService_PerformanceSessionAdd_FullMethodName      = "/service.PerformanceSessionService/PerformanceSessionAdd"
+	PerformanceSessionService_PerformanceSessionUpdate_FullMethodName   = "/service.PerformanceSessionService/PerformanceSessionUpdate"
+	PerformanceSessionService_PerformanceSessionRetrieve_FullMethodName = "/service.PerformanceSessionService/PerformanceSessionRetrieve"
+	PerformanceSessionService_PerformanceSessionRemove_FullMethodName   = "/service.PerformanceSessionService/PerformanceSessionRemove"
+)
+
+// PerformanceSessionServiceClient is the client API for PerformanceSessionService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type PerformanceSessionServiceClient interface {
+	// PerformanceSessionAdd 演出活动场次表 创建
+	PerformanceSessionAdd(ctx context.Context, in *PerformanceSessionAddReq, opts ...grpc.CallOption) (*PerformanceSessionAddResp, error)
+	// PerformanceSessionUpdate 演出活动场次表 更新
+	PerformanceSessionUpdate(ctx context.Context, in *PerformanceSessionUpdateReq, opts ...grpc.CallOption) (*EmptyResp, error)
+	// PerformanceSessionRetrieve 演出活动场次表 获取
+	PerformanceSessionRetrieve(ctx context.Context, in *PerformanceSessionRetrieveReq, opts ...grpc.CallOption) (*PerformanceSessionRetrieveResp, error)
+	// PerformanceSessionRemove 演出活动场次表 删除
+	PerformanceSessionRemove(ctx context.Context, in *PerformanceSessionRemoveReq, opts ...grpc.CallOption) (*EmptyResp, error)
+}
+
+type performanceSessionServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewPerformanceSessionServiceClient(cc grpc.ClientConnInterface) PerformanceSessionServiceClient {
+	return &performanceSessionServiceClient{cc}
+}
+
+func (c *performanceSessionServiceClient) PerformanceSessionAdd(ctx context.Context, in *PerformanceSessionAddReq, opts ...grpc.CallOption) (*PerformanceSessionAddResp, error) {
+	out := new(PerformanceSessionAddResp)
+	err := c.cc.Invoke(ctx, PerformanceSessionService_PerformanceSessionAdd_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *performanceSessionServiceClient) PerformanceSessionUpdate(ctx context.Context, in *PerformanceSessionUpdateReq, opts ...grpc.CallOption) (*EmptyResp, error) {
+	out := new(EmptyResp)
+	err := c.cc.Invoke(ctx, PerformanceSessionService_PerformanceSessionUpdate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *performanceSessionServiceClient) PerformanceSessionRetrieve(ctx context.Context, in *PerformanceSessionRetrieveReq, opts ...grpc.CallOption) (*PerformanceSessionRetrieveResp, error) {
+	out := new(PerformanceSessionRetrieveResp)
+	err := c.cc.Invoke(ctx, PerformanceSessionService_PerformanceSessionRetrieve_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *performanceSessionServiceClient) PerformanceSessionRemove(ctx context.Context, in *PerformanceSessionRemoveReq, opts ...grpc.CallOption) (*EmptyResp, error) {
+	out := new(EmptyResp)
+	err := c.cc.Invoke(ctx, PerformanceSessionService_PerformanceSessionRemove_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// PerformanceSessionServiceServer is the server API for PerformanceSessionService service.
+// All implementations must embed UnimplementedPerformanceSessionServiceServer
+// for forward compatibility
+type PerformanceSessionServiceServer interface {
+	// PerformanceSessionAdd 演出活动场次表 创建
+	PerformanceSessionAdd(context.Context, *PerformanceSessionAddReq) (*PerformanceSessionAddResp, error)
+	// PerformanceSessionUpdate 演出活动场次表 更新
+	PerformanceSessionUpdate(context.Context, *PerformanceSessionUpdateReq) (*EmptyResp, error)
+	// PerformanceSessionRetrieve 演出活动场次表 获取
+	PerformanceSessionRetrieve(context.Context, *PerformanceSessionRetrieveReq) (*PerformanceSessionRetrieveResp, error)
+	// PerformanceSessionRemove 演出活动场次表 删除
+	PerformanceSessionRemove(context.Context, *PerformanceSessionRemoveReq) (*EmptyResp, error)
+	mustEmbedUnimplementedPerformanceSessionServiceServer()
+}
+
+// UnimplementedPerformanceSessionServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedPerformanceSessionServiceServer struct {
+}
+
+func (UnimplementedPerformanceSessionServiceServer) PerformanceSessionAdd(context.Context, *PerformanceSessionAddReq) (*PerformanceSessionAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PerformanceSessionAdd not implemented")
+}
+func (UnimplementedPerformanceSessionServiceServer) PerformanceSessionUpdate(context.Context, *PerformanceSessionUpdateReq) (*EmptyResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PerformanceSessionUpdate not implemented")
+}
+func (UnimplementedPerformanceSessionServiceServer) PerformanceSessionRetrieve(context.Context, *PerformanceSessionRetrieveReq) (*PerformanceSessionRetrieveResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PerformanceSessionRetrieve not implemented")
+}
+func (UnimplementedPerformanceSessionServiceServer) PerformanceSessionRemove(context.Context, *PerformanceSessionRemoveReq) (*EmptyResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PerformanceSessionRemove not implemented")
+}
+func (UnimplementedPerformanceSessionServiceServer) mustEmbedUnimplementedPerformanceSessionServiceServer() {
+}
+
+// UnsafePerformanceSessionServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PerformanceSessionServiceServer will
+// result in compilation errors.
+type UnsafePerformanceSessionServiceServer interface {
+	mustEmbedUnimplementedPerformanceSessionServiceServer()
+}
+
+func RegisterPerformanceSessionServiceServer(s grpc.ServiceRegistrar, srv PerformanceSessionServiceServer) {
+	s.RegisterService(&PerformanceSessionService_ServiceDesc, srv)
+}
+
+func _PerformanceSessionService_PerformanceSessionAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PerformanceSessionAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PerformanceSessionServiceServer).PerformanceSessionAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PerformanceSessionService_PerformanceSessionAdd_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PerformanceSessionServiceServer).PerformanceSessionAdd(ctx, req.(*PerformanceSessionAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PerformanceSessionService_PerformanceSessionUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PerformanceSessionUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PerformanceSessionServiceServer).PerformanceSessionUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PerformanceSessionService_PerformanceSessionUpdate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PerformanceSessionServiceServer).PerformanceSessionUpdate(ctx, req.(*PerformanceSessionUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PerformanceSessionService_PerformanceSessionRetrieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PerformanceSessionRetrieveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PerformanceSessionServiceServer).PerformanceSessionRetrieve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PerformanceSessionService_PerformanceSessionRetrieve_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PerformanceSessionServiceServer).PerformanceSessionRetrieve(ctx, req.(*PerformanceSessionRetrieveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PerformanceSessionService_PerformanceSessionRemove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PerformanceSessionRemoveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PerformanceSessionServiceServer).PerformanceSessionRemove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PerformanceSessionService_PerformanceSessionRemove_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PerformanceSessionServiceServer).PerformanceSessionRemove(ctx, req.(*PerformanceSessionRemoveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// PerformanceSessionService_ServiceDesc is the grpc.ServiceDesc for PerformanceSessionService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var PerformanceSessionService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "service.PerformanceSessionService",
+	HandlerType: (*PerformanceSessionServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "PerformanceSessionAdd",
+			Handler:    _PerformanceSessionService_PerformanceSessionAdd_Handler,
+		},
+		{
+			MethodName: "PerformanceSessionUpdate",
+			Handler:    _PerformanceSessionService_PerformanceSessionUpdate_Handler,
+		},
+		{
+			MethodName: "PerformanceSessionRetrieve",
+			Handler:    _PerformanceSessionService_PerformanceSessionRetrieve_Handler,
+		},
+		{
+			MethodName: "PerformanceSessionRemove",
+			Handler:    _PerformanceSessionService_PerformanceSessionRemove_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
+}
+
+const (
+	UserService_UserAdd_FullMethodName      = "/service.UserService/UserAdd"
+	UserService_UserUpdate_FullMethodName   = "/service.UserService/UserUpdate"
+	UserService_UserRetrieve_FullMethodName = "/service.UserService/UserRetrieve"
+	UserService_UserRemove_FullMethodName   = "/service.UserService/UserRemove"
+)
+
+// UserServiceClient is the client API for UserService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type UserServiceClient interface {
+	// UserAdd 用户表 创建
+	UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
+	// UserUpdate 用户表 更新
+	UserUpdate(ctx context.Context, in *UserUpdateReq, opts ...grpc.CallOption) (*EmptyResp, error)
+	// UserRetrieve 用户表 获取
+	UserRetrieve(ctx context.Context, in *UserRetrieveReq, opts ...grpc.CallOption) (*UserRetrieveResp, error)
+	// UserRemove 用户表 删除
+	UserRemove(ctx context.Context, in *UserRemoveReq, opts ...grpc.CallOption) (*EmptyResp, error)
+}
+
+type userServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
+	return &userServiceClient{cc}
+}
+
+func (c *userServiceClient) UserAdd(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error) {
+	out := new(UserAddResp)
+	err := c.cc.Invoke(ctx, UserService_UserAdd_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UserUpdate(ctx context.Context, in *UserUpdateReq, opts ...grpc.CallOption) (*EmptyResp, error) {
+	out := new(EmptyResp)
+	err := c.cc.Invoke(ctx, UserService_UserUpdate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UserRetrieve(ctx context.Context, in *UserRetrieveReq, opts ...grpc.CallOption) (*UserRetrieveResp, error) {
+	out := new(UserRetrieveResp)
+	err := c.cc.Invoke(ctx, UserService_UserRetrieve_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UserRemove(ctx context.Context, in *UserRemoveReq, opts ...grpc.CallOption) (*EmptyResp, error) {
+	out := new(EmptyResp)
+	err := c.cc.Invoke(ctx, UserService_UserRemove_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// UserServiceServer is the server API for UserService service.
+// All implementations must embed UnimplementedUserServiceServer
+// for forward compatibility
+type UserServiceServer interface {
+	// UserAdd 用户表 创建
+	UserAdd(context.Context, *UserAddReq) (*UserAddResp, error)
+	// UserUpdate 用户表 更新
+	UserUpdate(context.Context, *UserUpdateReq) (*EmptyResp, error)
+	// UserRetrieve 用户表 获取
+	UserRetrieve(context.Context, *UserRetrieveReq) (*UserRetrieveResp, error)
+	// UserRemove 用户表 删除
+	UserRemove(context.Context, *UserRemoveReq) (*EmptyResp, error)
+	mustEmbedUnimplementedUserServiceServer()
+}
+
+// UnimplementedUserServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedUserServiceServer struct {
+}
+
+func (UnimplementedUserServiceServer) UserAdd(context.Context, *UserAddReq) (*UserAddResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserAdd not implemented")
+}
+func (UnimplementedUserServiceServer) UserUpdate(context.Context, *UserUpdateReq) (*EmptyResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserUpdate not implemented")
+}
+func (UnimplementedUserServiceServer) UserRetrieve(context.Context, *UserRetrieveReq) (*UserRetrieveResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserRetrieve not implemented")
+}
+func (UnimplementedUserServiceServer) UserRemove(context.Context, *UserRemoveReq) (*EmptyResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserRemove not implemented")
+}
+func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
+
+// UnsafeUserServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to UserServiceServer will
+// result in compilation errors.
+type UnsafeUserServiceServer interface {
+	mustEmbedUnimplementedUserServiceServer()
+}
+
+func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv UserServiceServer) {
+	s.RegisterService(&UserService_ServiceDesc, srv)
+}
+
+func _UserService_UserAdd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserAddReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserAdd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserAdd_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserAdd(ctx, req.(*UserAddReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserUpdate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserUpdateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserUpdate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserUpdate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserUpdate(ctx, req.(*UserUpdateReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserRetrieve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserRetrieveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserRetrieve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserRetrieve_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserRetrieve(ctx, req.(*UserRetrieveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UserRemove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserRemoveReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UserRemove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UserRemove_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UserRemove(ctx, req.(*UserRemoveReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var UserService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "service.UserService",
+	HandlerType: (*UserServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "UserAdd",
+			Handler:    _UserService_UserAdd_Handler,
+		},
+		{
+			MethodName: "UserUpdate",
+			Handler:    _UserService_UserUpdate_Handler,
+		},
+		{
+			MethodName: "UserRetrieve",
+			Handler:    _UserService_UserRetrieve_Handler,
+		},
+		{
+			MethodName: "UserRemove",
+			Handler:    _UserService_UserRemove_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service.proto",
 }

@@ -6,10 +6,10 @@ import (
 	"github.com/JopenChen/zero-damai/common/errx"
 	"github.com/JopenChen/zero-damai/common/global"
 	"github.com/JopenChen/zero-damai/common/jwt"
-	"github.com/JopenChen/zero-damai/service/internal/svc"
-	"github.com/JopenChen/zero-damai/service/service_pb"
 	"github.com/Masterminds/squirrel"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
+	"service/internal/svc"
+	"service/service_pb"
 	"time"
 
 	"github.com/zeromicro/go-zero/core/logx"

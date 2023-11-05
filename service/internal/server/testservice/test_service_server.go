@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"github.com/JopenChen/zero-damai/service/internal/logic/testservice"
-	"github.com/JopenChen/zero-damai/service/internal/svc"
-	"github.com/JopenChen/zero-damai/service/service_pb"
+	"service/internal/logic/testservice"
+	"service/internal/svc"
+	"service/service_pb"
 )
 
 type TestServiceServer struct {

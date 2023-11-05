@@ -15,3 +15,9 @@ import "v0/login/login.api"
 import "v0/user/user.api"
 // 演出活动
 import "v0/performance/performance.api"
+// 订单表
+import "v0/order/order.api"
+// 演出活动场次座位表
+import "v0/performance_seat/performance_seat.api"
+// 演出活动场次表
+import "v0/performance_session/performance_session.api"

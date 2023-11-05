@@ -4,9 +4,9 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/JopenChen/zero-damai/gateway/internal/config"
-	"github.com/JopenChen/zero-damai/gateway/internal/handler"
-	"github.com/JopenChen/zero-damai/gateway/internal/svc"
+	"gateway/internal/config"
+	"gateway/internal/handler"
+	"gateway/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"

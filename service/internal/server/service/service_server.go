@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"github.com/JopenChen/zero-damai/service/internal/logic/service"
-	"github.com/JopenChen/zero-damai/service/internal/svc"
-	"github.com/JopenChen/zero-damai/service/service_pb"
+	"service/internal/logic/service"
+	"service/internal/svc"
+	"service/service_pb"
 )
 
 type ServiceServer struct {
@@ -26,16 +26,4 @@ func NewServiceServer(svcCtx *svc.ServiceContext) *ServiceServer {
 func (s *ServiceServer) Login(ctx context.Context, in *service_pb.LoginReq) (*service_pb.LoginResp, error) {
 	l := servicelogic.NewLoginLogic(ctx, s.svcCtx)
 	return l.Login(in)
-}
-
-// UserAdd 用户注册
-func (s *ServiceServer) UserAdd(ctx context.Context, in *service_pb.UserAddReq) (*service_pb.UserAddResp, error) {
-	l := servicelogic.NewUserAddLogic(ctx, s.svcCtx)
-	return l.UserAdd(in)
-}
-
-// PerformanceRetrieve 获取演出活动列表
-func (s *ServiceServer) PerformanceRetrieve(ctx context.Context, in *service_pb.PerformanceRetrieveReq) (*service_pb.PerformanceRetrieveResp, error) {
-	l := servicelogic.NewPerformanceRetrieveLogic(ctx, s.svcCtx)
-	return l.PerformanceRetrieve(in)
 }

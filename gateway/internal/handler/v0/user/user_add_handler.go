@@ -1,12 +1,13 @@
 package user
 
 import (
+	"gateway/internal/logic/v0/user"
+	"gateway/internal/svc"
+	"gateway/internal/types"
 	"net/http"
 
 	"github.com/JopenChen/zero-damai/common/response"
-	"github.com/JopenChen/zero-damai/gateway/internal/logic/v0/user"
-	"github.com/JopenChen/zero-damai/gateway/internal/svc"
-	"github.com/JopenChen/zero-damai/gateway/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

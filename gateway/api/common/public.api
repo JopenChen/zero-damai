@@ -9,6 +9,7 @@ info(
 )
 
 type (
+	Empty {}
 	Paging {
 		Page     int64  `form:"page,range=[0:],default=1"`
 		PageSize int64  `form:"page_size,range=[0:],default=10"`

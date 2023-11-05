@@ -1,13 +1,13 @@
-package servicelogic
+package performanceservicelogic
 
 import (
 	"context"
 	"fmt"
 	"github.com/JopenChen/zero-damai/common/global"
-	"github.com/JopenChen/zero-damai/service/internal/svc"
-	"github.com/JopenChen/zero-damai/service/service_pb"
-
 	"github.com/zeromicro/go-zero/core/logx"
+
+	"service/internal/svc"
+	"service/service_pb"
 )
 
 type PerformanceRetrieveLogic struct {
@@ -24,7 +24,7 @@ func NewPerformanceRetrieveLogic(ctx context.Context, svcCtx *svc.ServiceContext
 	}
 }
 
-// PerformanceRetrieve 获取演出活动列表
+// PerformanceRetrieve 演出活动表 获取
 func (l *PerformanceRetrieveLogic) PerformanceRetrieve(in *service_pb.PerformanceRetrieveReq) (resp *service_pb.PerformanceRetrieveResp, err error) {
 	resp = new(service_pb.PerformanceRetrieveResp)
 	resp.Data = make([]*service_pb.Performance, 0)
@@ -32,18 +32,18 @@ func (l *PerformanceRetrieveLogic) PerformanceRetrieve(in *service_pb.Performanc
 	countBuilder := l.svcCtx.PerformanceModel.CountBuilder(global.IdString)
 
 	// 过滤条件
-	for _, v := range in.Filter {
+	for _, v := range in.Paging.Filter {
 		performanceRowBuilder = performanceRowBuilder.Where(fmt.Sprintf("%s = ?", v.Field), v.Value)
 		countBuilder = countBuilder.Where(fmt.Sprintf("`%s` = ?", v.Field), v.Value)
 	}
 	// 排序条件
-	for _, v := range in.Sort {
+	for _, v := range in.Paging.Sort {
 		performanceRowBuilder = performanceRowBuilder.OrderBy(fmt.Sprintf("%s %s", v.Field, v.Order))
 		countBuilder = countBuilder.OrderBy(fmt.Sprintf("%s %s", v.Field, v.Order))
 	}
 
 	// 获取数据
-	performanceList, err := l.svcCtx.PerformanceModel.FindPageByCondition(l.ctx, in.Page, in.PageSize, performanceRowBuilder, "sale_at DESC")
+	performanceList, err := l.svcCtx.PerformanceModel.FindPageByCondition(l.ctx, in.Paging.Page, in.Paging.PageSize, performanceRowBuilder, "sale_at DESC")
 	if err != nil {
 		l.Logger.Errorf("PerformanceModel.FindPageByCondition error: %v", err)
 		return
@@ -60,15 +60,15 @@ func (l *PerformanceRetrieveLogic) PerformanceRetrieve(in *service_pb.Performanc
 	resp.Total = count
 	for _, v := range performanceList {
 		resp.Data = append(resp.Data, &service_pb.Performance{
-			Id:             v.Id,
-			Title:          v.Title,
-			Description:    v.Description,
-			City:           v.City,
-			Address:        v.Address,
-			PrioritySaleAt: v.PrioritySaleAt,
-			SaleAt:         v.SaleAt,
-			CreatedAt:      v.CreatedAt.Unix(),
-			UpdatedAt:      v.UpdatedAt.Unix(),
+			Id: v.Id,
+			//Title:          v.Title,
+			//Description:    v.Description,
+			//City:           v.City,
+			Address: v.Address,
+			//PrioritySaleAt: v.PrioritySaleAt,
+			//SaleAt:         v.SaleAt,
+			CreatedAt: v.CreatedAt.Unix(),
+			UpdatedAt: v.UpdatedAt.Unix(),
 		})
 	}
 	return

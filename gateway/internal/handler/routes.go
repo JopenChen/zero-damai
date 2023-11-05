@@ -4,10 +4,13 @@ package handler
 import (
 	"net/http"
 
-	v0login "github.com/JopenChen/zero-damai/gateway/internal/handler/v0/login"
-	v0performance "github.com/JopenChen/zero-damai/gateway/internal/handler/v0/performance"
-	v0user "github.com/JopenChen/zero-damai/gateway/internal/handler/v0/user"
-	"github.com/JopenChen/zero-damai/gateway/internal/svc"
+	v0login "gateway/internal/handler/v0/login"
+	v0order "gateway/internal/handler/v0/order"
+	v0performance "gateway/internal/handler/v0/performance"
+	v0performanceSeat "gateway/internal/handler/v0/performanceSeat"
+	v0performanceSession "gateway/internal/handler/v0/performanceSession"
+	v0user "gateway/internal/handler/v0/user"
+	"gateway/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )
@@ -31,6 +34,21 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/user",
 				Handler: v0user.UserAddHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/user/:id",
+				Handler: v0user.UserUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/user",
+				Handler: v0user.UserRetrieveHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/user/:id",
+				Handler: v0user.UserRemoveHandler(serverCtx),
+			},
 		},
 		rest.WithPrefix("/v0"),
 	)
@@ -38,12 +56,104 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
+				Method:  http.MethodPost,
+				Path:    "/performance",
+				Handler: v0performance.PerformanceAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/performance/:id",
+				Handler: v0performance.PerformanceUpdateHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodGet,
 				Path:    "/performance",
 				Handler: v0performance.PerformanceRetrieveHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/performance/:id",
+				Handler: v0performance.PerformanceRemoveHandler(serverCtx),
+			},
 		},
-		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/v0"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/order",
+				Handler: v0order.OrderAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/order/:id",
+				Handler: v0order.OrderUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/order",
+				Handler: v0order.OrderRetrieveHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/order/:id",
+				Handler: v0order.OrderRemoveHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/v0"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/performanceSeat",
+				Handler: v0performanceSeat.PerformanceSeatAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/performanceSeat/:id",
+				Handler: v0performanceSeat.PerformanceSeatUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/performanceSeat",
+				Handler: v0performanceSeat.PerformanceSeatRetrieveHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/performanceSeat/:id",
+				Handler: v0performanceSeat.PerformanceSeatRemoveHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/v0"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/performanceSession",
+				Handler: v0performanceSession.PerformanceSessionAddHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPut,
+				Path:    "/performanceSession/:id",
+				Handler: v0performanceSession.PerformanceSessionUpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/performanceSession",
+				Handler: v0performanceSession.PerformanceSessionRetrieveHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/performanceSession/:id",
+				Handler: v0performanceSession.PerformanceSessionRemoveHandler(serverCtx),
+			},
+		},
 		rest.WithPrefix("/v0"),
 	)
 }

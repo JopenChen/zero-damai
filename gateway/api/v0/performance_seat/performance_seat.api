@@ -1,0 +1,80 @@
+syntax = "v1"
+
+info(
+    title: "演出活动场次座位表"
+    desc: "演出活动场次座位表相关接口"
+    author: "Jopen Chen"
+    email: "18318159812@163.com"
+    version: "v1.0.0"
+)
+
+type (
+    PerformanceSeat {
+        Id int64 `json:"id"`    // ID
+        SessionId int64 `json:"session_id"`    // 关联的演出场次ID
+        Seat string `json:"seat"`    // 席位，对应演出活动场次表中的席位
+        Row int64 `json:"row"`    // 座位所在行
+        Col int64 `json:"col"`    // 座位所在列
+        Status int64 `json:"status"`    // 预定状态：1=已预定、2=未预定：默认=2
+        CreatedAt int64 `json:"created_at"`    // 创建时间
+        UpdatedAt int64 `json:"updated_at"`    // 更新时间
+        IsDel int64 `json:"is_del"`    // 是否删除: 0=未指定、1=是、2=否: 默认=2
+    }
+    // 演出活动场次座位表 创建
+    PerformanceSeatAddReq {
+        GeneralPathId
+        Id int64 `json:"id,optional"`    // ID
+        SessionId int64 `json:"session_id,optional"`    // 关联的演出场次ID
+        Seat string `json:"seat,optional"`    // 席位，对应演出活动场次表中的席位
+        Row int64 `json:"row,optional"`    // 座位所在行
+        Col int64 `json:"col,optional"`    // 座位所在列
+        Status int64 `json:"status,optional"`    // 预定状态：1=已预定、2=未预定：默认=2
+    }
+    PerformanceSeatAddResp {
+        Id int64 `json:"id"` // ID
+    }
+
+    // 演出活动场次座位表 更新
+    PerformanceSeatUpdateReq {
+        Id int64 `json:"id,optional"`    // ID
+        SessionId int64 `json:"session_id,optional"`    // 关联的演出场次ID
+        Seat string `json:"seat,optional"`    // 席位，对应演出活动场次表中的席位
+        Row int64 `json:"row,optional"`    // 座位所在行
+        Col int64 `json:"col,optional"`    // 座位所在列
+        Status int64 `json:"status,optional"`    // 预定状态：1=已预定、2=未预定：默认=2
+    }
+
+    // 演出活动场次座位表 获取
+    PerformanceSeatRetrieveReq {
+        Paging
+    }
+    PerformanceSeatRetrieveResp {
+        Total int64                   `json:"total"` // 总数
+        Data  []*PerformanceSeat `json:"data"`  // 数据列表
+    }
+
+)
+
+@server (
+    group: v0/performanceSeat
+//  jwt: Auth
+//  middleware: CheckAuth
+    prefix: v0
+)
+service Gateway {
+    @doc "演出活动场次座位表 创建"
+    @handler PerformanceSeatAdd
+    post /performanceSeat (PerformanceSeatAddReq) returns (PerformanceSeatAddResp)
+
+    @doc "演出活动场次座位表 更新"
+    @handler PerformanceSeatUpdate
+    put /performanceSeat/:id (PerformanceSeatUpdateReq) returns (Empty)
+
+    @doc "演出活动场次座位表 获取"
+    @handler PerformanceSeatRetrieve
+    get /performanceSeat (PerformanceSeatRetrieveReq) returns (PerformanceSeatRetrieveResp)
+
+    @doc "演出活动场次座位表 删除"
+    @handler PerformanceSeatRemove
+    delete /performanceSeat/:id (GeneralPathId) returns (Empty)
+}

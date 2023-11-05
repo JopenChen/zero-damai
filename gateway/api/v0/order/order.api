@@ -1,0 +1,110 @@
+syntax = "v1"
+
+info(
+    title: "订单表"
+    desc: "订单表相关接口"
+    author: "Jopen Chen"
+    email: "18318159812@163.com"
+    version: "v1.0.0"
+)
+
+type (
+    Order {
+        Id int64 `json:"id"`    // 用户ID
+        Name string `json:"name"`    // 姓名
+        Nickname string `json:"nickname"`    // 昵称
+        Avatar string `json:"avatar"`    // 头像
+        Background string `json:"background"`    // 个人中心背景图
+        Mobile string `json:"mobile"`    // 手机号
+        Password string `json:"password"`    // 密码
+        Mail string `json:"mail"`    // 邮箱地址
+        Identity string `json:"identity"`    // 身份证号
+        Gender int64 `json:"gender"`    // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
+        Nation string `json:"nation"`    // 民族
+        Birthday int64 `json:"birthday"`    // 出生日期
+        Address string `json:"address"`    // 收货地址
+        Audience string `json:"audience"`    // 观影人信息,格式：[{"name":"xxx","identity_type": 1,"identity_number"}],identity 可选值：1=身份证、2=港澳台居民居住证、3=港澳居民来往内地通行证、4=台湾居民来往大陆通行证、5=护照、6=外国人永久居留身份证
+        Status int64 `json:"status"`    // 是否禁用: 0=未指定、1=开启、2=禁用: 默认=1
+        LoginAt int64 `json:"login_at"`    // 登录时间
+        CreatedAt int64 `json:"created_at"`    // 创建时间
+        UpdatedAt int64 `json:"updated_at"`    // 更新时间
+        IsDel int64 `json:"is_del"`    // 是否删除: 0=未指定、1=是、2=否: 默认=2
+    }
+    // 订单表 创建
+    OrderAddReq {
+        GeneralPathId
+        Id int64 `json:"id,optional"`    // 用户ID
+        Name string `json:"name,optional"`    // 姓名
+        Nickname string `json:"nickname,optional"`    // 昵称
+        Avatar string `json:"avatar,optional"`    // 头像
+        Background string `json:"background,optional"`    // 个人中心背景图
+        Mobile string `json:"mobile,optional"`    // 手机号
+        Password string `json:"password,optional"`    // 密码
+        Mail string `json:"mail,optional"`    // 邮箱地址
+        Identity string `json:"identity,optional"`    // 身份证号
+        Gender int64 `json:"gender,optional"`    // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
+        Nation string `json:"nation,optional"`    // 民族
+        Birthday int64 `json:"birthday,optional"`    // 出生日期
+        Address string `json:"address,optional"`    // 收货地址
+        Audience string `json:"audience,optional"`    // 观影人信息,格式：[{"name":"xxx","identity_type": 1,"identity_number"}],identity 可选值：1=身份证、2=港澳台居民居住证、3=港澳居民来往内地通行证、4=台湾居民来往大陆通行证、5=护照、6=外国人永久居留身份证
+        Status int64 `json:"status,optional"`    // 是否禁用: 0=未指定、1=开启、2=禁用: 默认=1
+        LoginAt int64 `json:"login_at,optional"`    // 登录时间
+    }
+    OrderAddResp {
+        Id int64 `json:"id"` // ID
+    }
+
+    // 订单表 更新
+    OrderUpdateReq {
+        Id int64 `json:"id,optional"`    // 用户ID
+        Name string `json:"name,optional"`    // 姓名
+        Nickname string `json:"nickname,optional"`    // 昵称
+        Avatar string `json:"avatar,optional"`    // 头像
+        Background string `json:"background,optional"`    // 个人中心背景图
+        Mobile string `json:"mobile,optional"`    // 手机号
+        Password string `json:"password,optional"`    // 密码
+        Mail string `json:"mail,optional"`    // 邮箱地址
+        Identity string `json:"identity,optional"`    // 身份证号
+        Gender int64 `json:"gender,optional"`    // 性别: 0=未指定、1=男、2=女、3=第三性别、4=保密: 默认=4
+        Nation string `json:"nation,optional"`    // 民族
+        Birthday int64 `json:"birthday,optional"`    // 出生日期
+        Address string `json:"address,optional"`    // 收货地址
+        Audience string `json:"audience,optional"`    // 观影人信息,格式：[{"name":"xxx","identity_type": 1,"identity_number"}],identity 可选值：1=身份证、2=港澳台居民居住证、3=港澳居民来往内地通行证、4=台湾居民来往大陆通行证、5=护照、6=外国人永久居留身份证
+        Status int64 `json:"status,optional"`    // 是否禁用: 0=未指定、1=开启、2=禁用: 默认=1
+        LoginAt int64 `json:"login_at,optional"`    // 登录时间
+    }
+
+    // 订单表 获取
+    OrderRetrieveReq {
+        Paging
+    }
+    OrderRetrieveResp {
+        Total int64                   `json:"total"` // 总数
+        Data  []*Order `json:"data"`  // 数据列表
+    }
+
+)
+
+@server (
+    group: v0/order
+//  jwt: Auth
+//  middleware: CheckAuth
+    prefix: v0
+)
+service Gateway {
+    @doc "订单表 创建"
+    @handler OrderAdd
+    post /order (OrderAddReq) returns (OrderAddResp)
+
+    @doc "订单表 更新"
+    @handler OrderUpdate
+    put /order/:id (OrderUpdateReq) returns (Empty)
+
+    @doc "订单表 获取"
+    @handler OrderRetrieve
+    get /order (OrderRetrieveReq) returns (OrderRetrieveResp)
+
+    @doc "订单表 删除"
+    @handler OrderRemove
+    delete /order/:id (GeneralPathId) returns (Empty)
+}

@@ -1,4 +1,4 @@
-package servicelogic
+package userservicelogic
 
 import (
 	"context"
@@ -10,8 +10,8 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"time"
 
-	"github.com/JopenChen/zero-damai/service/internal/svc"
-	"github.com/JopenChen/zero-damai/service/service_pb"
+	"service/internal/svc"
+	"service/service_pb"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -30,7 +30,7 @@ func NewUserAddLogic(ctx context.Context, svcCtx *svc.ServiceContext) *UserAddLo
 	}
 }
 
-// UserAdd 用户注册
+// UserAdd 用户表 创建
 func (l *UserAddLogic) UserAdd(in *service_pb.UserAddReq) (resp *service_pb.UserAddResp, err error) {
 	resp = new(service_pb.UserAddResp)
 	userRowBuilder := l.svcCtx.UserModel.RowBuilder().
