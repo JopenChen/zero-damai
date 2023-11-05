@@ -5,108 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b76fb1e3-1428-46c1-9215-4bf4b66c82df" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/gateway/api/v0/order/order.api" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/api/v0/performance_seat/performance_seat.api" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/api/v0/performance_session/performance_session.api" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/order/order_add_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/order/order_remove_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/order/order_retrieve_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/order/order_update_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/performance/performance_add_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/performance/performance_remove_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/performance/performance_update_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/performanceSeat/performance_seat_add_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/performanceSeat/performance_seat_remove_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/performanceSeat/performance_seat_retrieve_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/performanceSeat/performance_seat_update_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/performanceSession/performance_session_add_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/performanceSession/performance_session_remove_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/performanceSession/performance_session_retrieve_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/performanceSession/performance_session_update_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/user/user_remove_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/user/user_retrieve_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/user/user_update_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/order/order_add_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/order/order_remove_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/order/order_retrieve_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/order/order_update_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/performance/performance_add_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/performance/performance_remove_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/performance/performance_update_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/performanceSeat/performance_seat_add_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/performanceSeat/performance_seat_remove_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/performanceSeat/performance_seat_retrieve_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/performanceSeat/performance_seat_update_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/performanceSession/performance_session_add_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/performanceSession/performance_session_remove_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/performanceSession/performance_session_retrieve_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/performanceSession/performance_session_update_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/user/user_remove_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/user/user_retrieve_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/user/user_update_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/mysql/log/performance_model.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/mysql/log/performance_model_gen.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/mysql/log/vars.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/mysql/order/order_model.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/mysql/order/order_model_gen.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/mysql/order/vars.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/client/orderservice/order_service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/client/performanceseatservice/performance_seat_service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/client/performanceservice/performance_service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/client/performancesessionservice/performance_session_service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/client/userservice/user_service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/orderservice/order_add_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/orderservice/order_remove_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/orderservice/order_retrieve_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/orderservice/order_update_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/performanceseatservice/performance_seat_add_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/performanceseatservice/performance_seat_remove_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/performanceseatservice/performance_seat_retrieve_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/performanceseatservice/performance_seat_update_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/performanceservice/performance_add_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/performanceservice/performance_remove_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/performanceservice/performance_update_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/performancesessionservice/performance_session_add_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/performancesessionservice/performance_session_remove_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/performancesessionservice/performance_session_retrieve_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/performancesessionservice/performance_session_update_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/userservice/user_remove_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/userservice/user_retrieve_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/logic/userservice/user_update_logic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/server/orderservice/order_service_server.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/server/performanceseatservice/performance_seat_service_server.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/server/performanceservice/performance_service_server.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/server/performancesessionservice/performance_session_service_server.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/service/internal/server/userservice/user_service_server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/api/common/public.api" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/api/common/public.api" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/api/gateway.api" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/api/gateway.api" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/api/v0/performance/performance.api" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/api/v0/performance/performance.api" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/api/v0/user/user.api" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/api/v0/user/user.api" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/gateway.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/internal/handler/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/handler/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/internal/handler/v0/login/login_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/handler/v0/login/login_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/internal/logic/v0/login/login_logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/login/login_logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/internal/logic/v0/user/user_add_logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/logic/v0/user/user_add_logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/internal/svc/service_context.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/svc/service_context.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/internal/types/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/types/types.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/mysql/performance/performance_model_gen.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/mysql/performance/performance_model_gen.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/mysql/performance_seat/performance_seat_model_gen.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/mysql/performance_seat/performance_seat_model_gen.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/mysql/performance_session/performance_session_model_gen.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/mysql/performance_session/performance_session_model_gen.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/mysql/user/user_model_gen.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/mysql/user/user_model_gen.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/client/service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/client/service/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/client/testservice/test_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/client/testservice/test_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/internal/logic/service/login_logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/logic/service/login_logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/internal/logic/service/performance_retrieve_logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/logic/performanceservice/performance_retrieve_logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/internal/logic/service/user_add_logic.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/logic/userservice/user_add_logic.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/internal/logic/testservice/login_logic.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/internal/server/service/service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/server/service/service_server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/internal/server/testservice/test_service_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/server/testservice/test_service_server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/internal/svc/service_context.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/internal/svc/service_context.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/proto/service.proto" beforeDir="false" afterPath="$PROJECT_DIR$/service/proto/service.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/service.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/service_pb/service.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/service_pb/service.pb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/service_pb/service_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/service_pb/service_grpc.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,9 +37,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2WxnyR5gNC8rBLcZM03RwkyPnbf" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -148,31 +48,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultApiTemplateProperty": "Api File",
-    "DefaultGoTemplateProperty": "Go File",
-    "DefaultProtoTemplateProperty": "Proto File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/workspace/golang_workspace/src/github.com/JopenChen/zero-damai",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "go.vgo"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultApiTemplateProperty&quot;: &quot;Api File&quot;,
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;DefaultProtoTemplateProperty&quot;: &quot;Proto File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/workspace/golang_workspace/src/github.com/JopenChen/zero-damai&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;go.vgo&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\workspace\golang_workspace\src\github.com\JopenChen\zero-damai" />
@@ -287,7 +187,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/gateway/internal/logic/v0/performance/performance_retrieve_logic.go</url>
-          <line>30</line>
+          <line>29</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>

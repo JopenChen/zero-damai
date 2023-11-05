@@ -29,8 +29,14 @@ go mod tidy
 3、修改配置文件
 
 4、启动 RPC 服务
+```shell
+go run service.go -f etc/service.yaml
+```
 
 5、启动 API 服务
+```shell
+go run gateway.go -f etc/service.yaml
+```
 
 6、测试
 
@@ -46,7 +52,7 @@ go mod tidy
 ## 数据库设计
 
 ## 公众号：Golang 进阶栈
-<img height="100" src="doc\images\公众号二维码.jpg" title="Golang 进阶栈公众号二维码" width="100"/>
+<img height="100" src="doc/images/公众号二维码.jpg" title="Golang 进阶栈公众号二维码" width="100" alt="公众号二维码"/>
 
 1、API 文档开放地址, 对话框回复：API 文档；
 
